@@ -1,4 +1,8 @@
 import React from "react";
+import Image from "next/image";
+import Img1 from "../../public/Image/img1.png";
+import Img2 from "../../public/Image/img2.png";
+import Img3 from "../../public/Image/img3.png";
 
 const textsec1 = () => {
   return (
@@ -36,6 +40,9 @@ const textsec1 = () => {
           continuous-time signal will be converted back to a discrete-time
           signal at the receiving end.
         </p>
+
+        <Image className="py-8" src={Img1} />
+
         <p className="pb-6">
           Pulse–amplitude modulation (PAM) is a form of signal modulation where
           the message information is encoded in the amplitude of a series of
@@ -46,6 +53,14 @@ const textsec1 = () => {
           transmit a sequence of CT pulses of some pre-specified shape p(t),
           with the sequence of pulse amplitudes carrying the information.
         </p>
+
+        <div className="px-24 py-8">
+          <Image className="py-8" src={Img2} />
+          <p className="font-bold ">Fig: Block Diagram of PAM Generation</p>
+
+          <Image className="py-8 px-12" src={Img3} />
+          <p className="font-bold ">Fig: Pulse Amplitude Modulation Signal</p>
+        </div>
 
         <p className="pb-6">
           The message signal and the sequence of amplitude-modulated rectangular
@@ -71,7 +86,9 @@ const textsec1 = () => {
           generated then we may express the PAM signal as{" "}
         </p>
 
-        <span className="pb-6">s(t) = ∫_(n= -∞)^∞▒〖m(nT_s 〗). h(t - nT_s)</span>
+        <span className="pb-6">
+          s(t) = ∫_(n= -∞)^∞▒〖m(nT_s 〗). h(t - nT_s)
+        </span>
 
         <p className="pb-6">
           where Ts is the sampling period m(nTs) is the sample value of m(t)
