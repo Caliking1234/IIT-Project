@@ -1,15 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import Img13 from "../../public/Image/img13.png"
-import Img14 from "../../public/Image/img14.png"
-import Img15 from "../../public/Image/img15.png"
-import Img16 from "../../public/Image/img16.png"
-import Img17 from "../../public/Image/img17.png"
-import Img18 from "../../public/Image/img18.png"
-import Img19 from "../../public/Image/img19.png"
-import Img20 from "../../public/Image/img20.png"
-import Img21 from "../../public/Image/img21.png"
-
+import Img13 from "../../public/Image/img13.png";
+import Img14 from "../../public/Image/img14.png";
+import Img15 from "../../public/Image/img15.png";
+import Img16 from "../../public/Image/img16.png";
+import Img17 from "../../public/Image/img17.png";
+import Img18 from "../../public/Image/img18.png";
+import Img19 from "../../public/Image/img19.png";
+import Img20 from "../../public/Image/img20.png";
+import Img21 from "../../public/Image/img21.png";
 
 const Textsec4 = () => {
   return (
@@ -31,14 +30,28 @@ const Textsec4 = () => {
       <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">
         Generation of Delta Modulated Signal
       </h1>
-      <Image className="" src={Img13} />
+
+      <div className="px-24 py-8">
+        <Image className="py-8" src={Img13} />
+        <span className="font-bold">
+          Fig: Delta Modulation and Demodulation
+        </span>
+      </div>
+
       <p className="pb-6">
         DPCM is much simpler if we just use th e previous sample for the
         predictor. The predictor is just a delay. In delta modulation, the
         transmitted data are reduced to a 1-bit data stream. It uses the
         simplest possible quantizer i.e. two-level or one-bit quantizer.{" "}
       </p>
-      <Image className="" src={Img14} />
+
+      <div className="px-24 py-8">
+        <Image className="py-8" src={Img14} />
+        <span className="font-bold">
+          Fig: Waveform representation of delta modulation where m(t) is the
+          analog signal and u(t) is the staircase function.
+        </span>
+      </div>
 
       <p className="pb-6">
         Here, the present sample value is compared with the previous sample
@@ -64,7 +77,15 @@ const Textsec4 = () => {
       </p>
 
       <p className="text-xl pb-4 font-bold ">1. Granular noise</p>
-      <Image className="" src={Img15} />
+
+      <div className="px-24 py-8">
+        <Image className="py-8" src={Img15} />
+        <span className="font-bold">
+          Fig: Delta Modulation where x(t) is the analog signal and u(t) is the
+          staircase function.
+        </span>
+      </div>
+
       <p className="pb-6">
         Granular or Idle noise occurs when the step size is too large compared
         to a small variation in the input signal. This means that for very small
@@ -112,9 +133,11 @@ const Textsec4 = () => {
         voice communication.
       </p>
 
-      <Image className="" src={Img16} />
-      <Image className="" src={Img17} />
-
+      <div className="lg:px-24 py-8">
+        <Image className="" src={Img16} />
+        <Image className="py-8" src={Img17} />
+        <span className="font-bold">Fig: PCM waveform</span>
+      </div>
       <p className="pb-6">
         Instead of a pulse train, PCM produces a series of numbers or digits,
         and hence this process is called as digital. Each one of these digits,
@@ -170,7 +193,11 @@ const Textsec4 = () => {
       </p>
 
       <h1 className="text-xl pb-4 font-bold">Basic Elements of PCM</h1>
-      <Image className="" src={Img18} />
+
+      <div className="lg:px-24 py-8">
+        <Image className="" src={Img18} />
+        <span className="font-bold">Fig: Pulse Code Modulation</span>
+      </div>
 
       <h1 className="text-xl pb-4 font-bold">Pulse Code Modulation</h1>
 
@@ -214,7 +241,12 @@ const Textsec4 = () => {
         transmit the exact amplitudes of the samples. Any human sense (the ear
         or the eye), as an ultimate receiver, can detect only finite intensity
         differences.
-        <Image className="" src={Img19} />
+        <div className="lg:px-24 py-8">
+          <Image className="" src={Img19} />
+          <span className="font-bold">
+            Fig: Description of a memoryless quantizer
+          </span>
+        </div>
         This means the original continuous signal may be approximated by a
         signal constructed of discrete amplitudes selected on a minimum error
         basis from an available set. For example, amplitude quantization is
@@ -251,7 +283,10 @@ const Textsec4 = () => {
 
       <h1 className="text-xl pb-4 font-bold">1. Mid treed Quantizer</h1>
 
-      <Image className="" src={Img20} />
+      <div className="lg:px-24 py-8">
+        <Image className="" src={Img20} />
+        {/* <span className="font-bold">Fig: Description of a memoryless quantizer</span> */}
+      </div>
 
       <p className="pb-6">
         Quantization error=quantized value-actual sampled value
@@ -266,7 +301,10 @@ const Textsec4 = () => {
       </p>
 
       <h1 className="text-xl pb-4 font-bold">2. Mid-Rise Quantizer:-</h1>
-      <Image className="" src={Img21} />
+      <div className="lg:px-24 py-8">
+        <Image className="" src={Img21} />
+        <span className="font-bold">Fig: Mid-Rise Quantizer</span>
+      </div>
       <p className="pb-6">
         In mid-rise quantizer the input values are ± Δ,± 2Δ,± 3Δ,….. the
         quantized values are ± Δ/2, ± 3Δ/2, ± 5Δ/2,…. The quantization error is
