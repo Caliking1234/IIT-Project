@@ -110,6 +110,74 @@ const Textsec5 = () => {
       </p>
 
       {/* <span>equation to be added</span> */}
+
+      <h1>Noise in PCM Systems</h1>
+      <p className="font-bold">Signal to Quantization Noise ratio in PCM:</p>
+      <p>The signal-to-quantization noise ratio is given as:</p>
+
+      <span></span>
+
+      <p>The number of quantization values is equal to:</p>
+      <p>q = 2v</p>
+      <p>Where v is the number of bits used to represent each level</p>
+      <p>On the other hand, the step size is represented as</p>
+      <p>∆ = (2 . Xmax) / 2v</p>
+
+      <p>Substitute this value in equation (i), and we get</p>
+
+      <span></span>
+      <p>
+        Let the normalized signal power is equal to P then the
+        signal-to-quantization noise will be given by
+      </p>
+      <span></span>
+
+      <p>
+        The above equation shows that the output signal-to-noise ratio of the
+        quantizer increases exponentially with an increasing number of bits per
+        sample, v. recognizing that an increase in v requires a proportionate
+        increase in the channel (transmission) bandwidth BT, we thus see that
+        the use of a binary code for the representation of a message signal (as
+        in pulse code modulation) provides a more efficient method than either
+        frequency modulation (FM) or pulse position modulation (PPM) for the
+        trade-off of increased channel bandwidth for improved noise performance.
+        In making this statement, we presume that the FM and PPM systems are
+        limited by receiver noise, whereas the binary-coded modulation is
+        limited by quantization error/noise.{" "}
+      </p>
+
+      <p>Example</p>
+
+      <p>
+        Consider the special case of a full-load sinusoidal modulating signal of
+        amplitude Am, which utilizes all the representation levels provided. The
+        average signal power is (assuming a load of 1 ohm)
+      </p>
+      <span>P = (A_m^2)/2</span>
+
+      <p>
+        The total range of the quantizer input is 2Am, because the modulating
+        signal swings between - Am and Am. We may therefore set Xmax = Am.
+      </p>
+
+      <p>
+        As the normalized quantizer error is ∆2/12. So, the quantization error
+        or noise should be{" "}
+      </p>
+
+      <span>
+        σ_Q^2 = ∆2/12 = 1/3 . X_max^2 . 2^(-2v) [as ∆ = (2X_max)/2^v ]
+      </span>
+      <span>Or, σ_Q^2 = ∆2/12 = 1/3 . A_m^2 . 2^(-2v) </span>
+
+      <p>
+        Thus the output signal-to-noise ratio of a uniform quantizer, for a
+        full-load test tone, is{" "}
+      </p>
+
+      <span>(SNR)o = (A_m^2/2)/((1/3).〖 A〗_m^2.2^(-2v) ) = (3/2) . 22v</span>
+
+      <p>Expressing the signal-to-noise ratio in decibels, we get</p>
     </div>
   );
 };
