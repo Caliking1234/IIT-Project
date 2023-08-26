@@ -1,6 +1,6 @@
 // import Head from 'next/head';
 import DiscreteEquationInputForm from './DiscreteEquationInputForm';
-import EquationInputForm from './EquationInputForm';
+// import EquationInputForm from './EquationInputForm';
 
 export default function page() {
   return (
@@ -14,7 +14,7 @@ export default function page() {
       </Head> */}
       <main>
         <h1>Equation Input and Plotting</h1>
-        <EquationInputForm />
+        {/* <EquationInputForm /> */}
         <DiscreteEquationInputForm/>
       </main>
     </div>
