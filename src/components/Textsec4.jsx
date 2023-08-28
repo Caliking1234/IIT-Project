@@ -57,9 +57,9 @@ const Textsec4 = () => {
         Here, the present sample value is compared with the previous sample
         value and this result whether the amplitude is increased or decreased is
         transmitted. If the difference is positive then the approximated signal
-        is increased by one step i.e. ′∆′ and ‘1’ is transmitted. If the
-        difference is negative then the approximated signal is reduced by ′∆′
-        and ‘0’ is transmitted as shown in the figure. Since the delta
+        is increased by one step i.e. &quot;∆&quot; and &quot;1&quot; is transmitted. If the
+        difference is negative then the approximated signal is reduced by &quot;∆&quot;
+        and &quot;0&quot; is transmitted as shown in the figure. Since the delta
         modulation transmits only one bit per sample. Therefore, the signalling
         rate and transmission bandwidth is quite small for delta modulation as
         compared to PCM and DPCM.
@@ -207,7 +207,7 @@ const Textsec4 = () => {
         analog-to-digital converter section. The low pass filter prior to
         sampling prevents aliasing of the message signal. The construction
         filter helps to obtain the original signal. The signal strength can be
-        enhanced through this regenerative repeater. So, the channel’s output
+        enhanced through this regenerative repeater. So, the channel&apos;s output
         also includes a regenerative repeater circuit to balance the signal
         loss, renovate the signal & also increases the signal strength.
       </p>
