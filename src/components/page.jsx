@@ -1,6 +1,7 @@
 "use client"
 import Head from 'next/head';
-import DiscreteEquationInputForm from '../../components/DiscreteEquationInputForm';
+import DiscreteEquationInputForm from './DiscreteEquationInputForm';
+// import EquationInputForm from './EquationInputForm';
 
 export default function page() {
   return (
