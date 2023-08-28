@@ -5,6 +5,7 @@ import Img23 from "../../public/Image/img23.png";
 import Img24 from "../../public/Image/img24.png";
 import Img25 from "../../public/Image/img25.png";
 
+
 const Textsec5 = () => {
   return (
     <div>
@@ -111,28 +112,28 @@ const Textsec5 = () => {
 
       {/* <span>equation to be added</span> */}
 
-      <h1>Noise in PCM Systems</h1>
+      <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">Noise in PCM Systems</h1>
       <p className="font-bold">Signal to Quantization Noise ratio in PCM:</p>
-      <p>The signal-to-quantization noise ratio is given as:</p>
+      <p className="pb-6">The signal-to-quantization noise ratio is given as:</p>
 
       <span></span>
 
-      <p>The number of quantization values is equal to:</p>
-      <p>q = 2v</p>
-      <p>Where v is the number of bits used to represent each level</p>
-      <p>On the other hand, the step size is represented as</p>
-      <p>∆ = (2 . Xmax) / 2v</p>
+      <p className="pb-6">The number of quantization values is equal to:</p>
+      <p className="pb-6">q = 2v</p>
+      <p className="pb-6">Where v is the number of bits used to represent each level</p>
+      <p className="pb-6">On the other hand, the step size is represented as</p>
+      <p className="pb-6">∆ = (2 . Xmax) / 2v</p>
 
-      <p>Substitute this value in equation (i), and we get</p>
+      <p className="pb-6">Substitute this value in equation (i), and we get</p>
 
       <span></span>
-      <p>
+      <p className="pb-6">
         Let the normalized signal power is equal to P then the
         signal-to-quantization noise will be given by
       </p>
       <span></span>
 
-      <p>
+      <p className="pb-6">
         The above equation shows that the output signal-to-noise ratio of the
         quantizer increases exponentially with an increasing number of bits per
         sample, v. recognizing that an increase in v requires a proportionate
@@ -146,21 +147,21 @@ const Textsec5 = () => {
         limited by quantization error/noise.{" "}
       </p>
 
-      <p>Example</p>
+      <p className="pb-6 font-bold">Example</p>
 
-      <p>
+      <p className="pb-6">
         Consider the special case of a full-load sinusoidal modulating signal of
         amplitude Am, which utilizes all the representation levels provided. The
         average signal power is (assuming a load of 1 ohm)
       </p>
       <span>P = (A_m^2)/2</span>
 
-      <p>
+      <p className="pb-6">
         The total range of the quantizer input is 2Am, because the modulating
         signal swings between - Am and Am. We may therefore set Xmax = Am.
       </p>
 
-      <p>
+      <p className="pb-6">
         As the normalized quantizer error is ∆2/12. So, the quantization error
         or noise should be{" "}
       </p>
@@ -170,14 +171,14 @@ const Textsec5 = () => {
       </span>
       <span>Or, σ_Q^2 = ∆2/12 = 1/3 . A_m^2 . 2^(-2v) </span>
 
-      <p>
+      <p className="pb-6">
         Thus the output signal-to-noise ratio of a uniform quantizer, for a
         full-load test tone, is{" "}
       </p>
 
       <span>(SNR)o = (A_m^2/2)/((1/3).〖 A〗_m^2.2^(-2v) ) = (3/2) . 22v</span>
 
-      <p>Expressing the signal-to-noise ratio in decibels, we get</p>
+      <p className="pb-6">Expressing the signal-to-noise ratio in decibels, we get</p>
     </div>
   );
 };

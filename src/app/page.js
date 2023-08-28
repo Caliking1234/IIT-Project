@@ -7,6 +7,7 @@ import Textsec4 from "@/components/Textsec4";
 import Textsec5 from "@/components/Textsec5";
 
 import Experiment from "@/components/experiment";
+import Sidebar from "@/components/Sidebar";
 
 export default function Home() {
   return (
@@ -14,19 +15,25 @@ export default function Home() {
 
     // </main>
     <main>
-      <div className="bg-blue-200  h-[90px]">
-        <h1 className="py-8 text-center underline underline-offset-8">hello</h1>
-      </div>
-      <div className="px-6 lg:px-24 py-20 bg-slate-100">
-        <div className="lg:px-24">
+      {/* <div className="bg-blue-200 z-90 h-[90px] ">
+        <h1 className=" py-8 text-center underline underline-offset-8">hello</h1>
+      </div> */}
+
+      <div>
+      <Sidebar/>
+
+
+      <div className=" px-6 lg:px-24 lg:ml-12 py-20 bg-slate-100">
+        <div className="lg:px-24 lg:ml-24">
           <Textsec1 />
           <Textsec2 />
           <Textsec3 />
           <Textsec4 />
           <Textsec5 />
         </div>
+      
       </div>
-
+      </div>
       {/* <Experiment /> */}
 
       <Footer />
