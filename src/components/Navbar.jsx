@@ -13,7 +13,7 @@ const Nav = () => {
 
   return (
     <div className='sticky top-0 z-50'>
-        <div className=" bg-white border-b-8 border-orange-600 backdrop-filter backdrop-blur-lg bg-opacity-50"> 
+        <div className=" bg-white border-b-8 border-orange-600 "> 
 
         
         <div className=" justify-between px-4 mx-auto lg:max-w-7xl  md:items-center md:flex md:px-8 ">
