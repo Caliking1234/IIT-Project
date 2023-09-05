@@ -141,7 +141,7 @@ const Textsec3 = () => {
       <p className="pb-6">
         Pulse position modulation is one type of analog modulation which allows
         variation within the position of the pulses based on the sampled
-        modulating signal’s amplitude is called PPM or Pulse Position
+        modulating signal&apos;s amplitude is called PPM or Pulse Position
         Modulation. In this type of modulation, the amplitude & width of the
         pulses are kept stable & the position of the pulses only varied.
       </p>

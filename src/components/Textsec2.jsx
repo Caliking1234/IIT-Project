@@ -77,10 +77,10 @@ const Textsec2 = () => {
 
       <p className="pb-6">
         A low duty cycle equates to low power because the power is off for most
-        of the time; the word duty cycle reflects the ratio of "on" time to the
-        regular interval or "period" of time. The duty cycle is measured in
+        of the time; the word duty cycle reflects the ratio of &quot;on&quot; time to the
+        regular interval or &quot;period&quot; of time. The duty cycle is measured in
         percent, with 100% representing full on. A digital signal has a duty
-        cycle of 50% and looks like a "square" wave when it is on 50% of the
+        cycle of 50% and looks like a &quot;square&quot; wave when it is on 50% of the
         time and off the other 50%. A digital signal has a duty cycle of greater
         than 50% when it spends more time in the on state than the off state. A
         digital signal has a duty cycle of 50% when it alternates between the on
