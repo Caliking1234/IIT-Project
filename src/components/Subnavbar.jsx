@@ -11,9 +11,9 @@ const Subnavbar = () => {
     const [navbar, setNavbar] = useState(false);
 
   return (
-    <div className="bg-green-400 py-4">
+    <div className="bg-green-400 py-2">
       <div className='sticky top-0'>
-        <div className="  "> 
+        <div className=" "> 
 
         
         <div className=" justify-between px-4 mx-auto lg:max-w-7xl  md:items-center md:flex md:px-8 ">
@@ -22,7 +22,7 @@ const Subnavbar = () => {
               
               
               
-              <div className="md:hidden">
+              <div className="md:hidden ">
                 <button
                   className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
                   onClick={() => setNavbar(!navbar)}
