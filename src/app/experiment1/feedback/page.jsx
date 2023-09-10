@@ -11,7 +11,7 @@ const page = () => {
         <p className="text-2xl font-semibold pb-4">Dear User,</p>
         <p className="text-xl">
           Thanks for using Virtual Labs. Your opinion is valuable to us. To help
-          us improve, we'd like to ask you a few questions about your
+          us improve, we&apos;d like to ask you a few questions about your
           experience. It will only take 3 minutes and your answers will help us
           make Virtual Labs better for you and other users.
         </p>
