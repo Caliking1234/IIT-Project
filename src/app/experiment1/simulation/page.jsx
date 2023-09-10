@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
+import Subnavbar from "../../../components/Subnavbar";
 
 const GraphPage = () => {
   const [sim, setsim] = useState(false);
@@ -14,7 +15,11 @@ const GraphPage = () => {
 
   useEffect(() => {
     // Function to generate data for the carrier signal
-    const generateCarrierSignal = (amplitude, carrierFrequency, signalDuration) => {
+    const generateCarrierSignal = (
+      amplitude,
+      carrierFrequency,
+      signalDuration
+    ) => {
       const stepSize = 1 / 1000; // 1000 steps per second
       const data = [];
       for (let t = 0; t < signalDuration; t += stepSize) {
@@ -60,10 +65,11 @@ const GraphPage = () => {
     setCarrierSignal(carrierSignalData);
     setPulse(pulseSignalData);
     setPamSignal(pamSignalData);
-  }, [amplitude,carrierFrequency,signalDuration]);
+  }, [amplitude, carrierFrequency, signalDuration]);
 
   return (
     <>
+      <Subnavbar />
       {!sim ? (
         <div className="flex flex-col justify-center items-center py-10">
           <h1 className=" text-3xl font-bold">Enter Simulation Requirements</h1>
@@ -83,7 +89,7 @@ const GraphPage = () => {
                 name="Amplitude"
                 value={amplitude}
                 onChange={(e) => setAmplitude(e.target.value)}
-                className="text-black h-8 rounded-md px-1 focus-within:outline-none bg-gray-200"
+                className="text-black p-6 px-4 h-8 rounded-md  focus-within:outline-none bg-gray-200"
                 required
               />
               <svg
@@ -94,7 +100,7 @@ const GraphPage = () => {
                 x="0"
                 y="0"
                 viewBox="0 0 354.987 354"
-                className=" w-5 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
+                className=" w-10 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
               >
                 <g>
                   <path
@@ -123,7 +129,7 @@ const GraphPage = () => {
                 name="Frequency"
                 value={carrierFrequency}
                 onChange={(e) => setcarriierfreq(e.target.value)}
-                className="text-black h-8 rounded-md px-1 focus-within:outline-none bg-gray-200"
+                className="text-black h-8 rounded-md p-6 px-4 focus-within:outline-none bg-gray-200"
                 required
               />
               <svg
@@ -134,7 +140,7 @@ const GraphPage = () => {
                 x="0"
                 y="0"
                 viewBox="0 0 441.92 441"
-                className=" w-5 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
+                className=" w-10 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
               >
                 <g>
                   <path
@@ -216,7 +222,7 @@ const GraphPage = () => {
                 name="Duration"
                 value={signalDuration}
                 onChange={(e) => setsignalDuration(e.target.value)}
-                className="text-black h-8 rounded-md px-1 focus-within:outline-none bg-gray-200"
+                className="text-black h-8 rounded-md p-6 px-4 focus-within:outline-none bg-gray-200"
                 required
               />
               <svg
@@ -227,7 +233,7 @@ const GraphPage = () => {
                 x="0"
                 y="0"
                 viewBox="0 0 24 24"
-                className=" w-5 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
+                className=" w-10 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
               >
                 <g>
                   <g data-name="Layer 2">
@@ -264,7 +270,7 @@ const GraphPage = () => {
             onClick={() => {
               setsim(true);
             }}
-            className=" w-[200px] rounded-md py-3 px-3 bg-[#33D7E6]"
+            className=" w-[200px] font-bold py-3 px-3 text-white hover:text-[#33D7E6] bg-[#33D7E6] rounded-md hover:bg-white hover:border-[#33D7E6] border-2"
           >
             Simulate
           </button>
@@ -355,7 +361,7 @@ const GraphPage = () => {
             onClick={() => {
               setsim(false);
             }}
-            className=" w-[50%] py-3 px-3 bg-[#33D7E6]"
+            className=" w-[50%] py-3 px-3 text-white hover:text-[#33D7E6] bg-[#33D7E6] rounded-md hover:bg-white hover:border-[#33D7E6] border-2"
           >
             Go back
           </button>

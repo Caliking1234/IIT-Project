@@ -67,13 +67,13 @@ const Subnavbar = () => {
                     </Link>
                   </li>
                   <li className="pb-6 hover:underline text-xl text-gray-600 py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-green-500  border-white-900  md:hover:text-white md:hover:bg-transparent">
-                    <Link href="/" onClick={() => setNavbar(!navbar)}>
+                    <Link href="/experiment1/pretest" onClick={() => setNavbar(!navbar)}>
                       Pretest
                     </Link>
                   </li>
 
                   <li className="pb-6 hover:underline text-xl text-gray-600 py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-green-500  border-white-900  md:hover:text-white md:hover:bg-transparent">
-                    <Link href="/" onClick={() => setNavbar(!navbar)}>
+                    <Link href="/experiment1/procedure" onClick={() => setNavbar(!navbar)}>
                       Procedure
                     </Link>
                   </li>
@@ -86,7 +86,7 @@ const Subnavbar = () => {
                     </Link>
                   </li>
                   <li className="pb-6 hover:underline text-xl text-gray-600 py-2 px-6 text-center  border-b-2 md:border-b-0  hover:bg-green-600  border-white-900  md:hover:text-white md:hover:bg-transparent">
-                    <Link href="/" onClick={() => setNavbar(!navbar)}>
+                    <Link href="/experiment1/posttest" onClick={() => setNavbar(!navbar)}>
                       Posttest
                     </Link>
                   </li>
