@@ -1,10 +1,10 @@
 import React from "react";
-import Textsec1 from "@/components/Textsec1";
-import Textsec2 from "@/components/Textsec2";
-import Textsec3 from "@/components/Textsec3";
-import Textsec4 from "@/components/Textsec4";
-import Textsec5 from "@/components/Textsec5";
-import Subnavbar from '@/components/Subnavbar'
+import Textsec1 from "../../../components/Textsec1";
+import Textsec2 from "../../../components/Textsec2";
+import Textsec3 from "../../../components/Textsec3";
+import Textsec4 from "../../../components/Textsec4";
+import Textsec5 from "../../../components/Textsec5";
+import Subnavbar from '../../../components/Subnavbar'
 
 const page = () => {
   return (

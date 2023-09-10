@@ -1,4 +1,4 @@
-import Subnavbar from "@/components/Subnavbar";
+import Subnavbar from "../../../components/Subnavbar";
 import React from "react";
 
 const page = () => {
