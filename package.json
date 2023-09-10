@@ -12,7 +12,7 @@
     "autoprefixer": "10.4.15",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
-    "mathjs": "^11.10.0",
+    "mathjs": "^11.11.0",
     "next": "13.4.19",
     "plotly.js": "^2.26.0",
     "postcss": "8.4.28",

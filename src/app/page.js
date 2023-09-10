@@ -8,14 +8,14 @@ import Textsec5 from "@/components/Textsec5";
 import Experiment from "@/components/experiment";
 import Sidebar from "@/components/Sidebar";
 import Landingpg from "./Landingpg";
+import PAM from "@/components/PAM";
 
 export default function Home() {
   return (
     <main>
       <div>
-
-        <Landingpg />
-        
+        {/* <Landingpg /> */}
+        <PAM />
       </div>
     </main>
   );
