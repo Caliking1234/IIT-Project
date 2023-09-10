@@ -1,24 +1,19 @@
 import Subnavbar from '@/components/Subnavbar'
 import React from 'react'
 import Image from "next/image";
-import Textsec1 from "@/components/Textsec1";
-import Textsec2 from "@/components/Textsec2";
-import Textsec3 from "@/components/Textsec3";
-import Textsec4 from "@/components/Textsec4";
-import Textsec5 from "@/components/Textsec5";
+
 
 const page = () => {
   return (
     <div>
         <Subnavbar/>
 
-        <div className='px-4 lg:px-16'>
+        <div className='px-4 lg:px-16 h-full p-4 lg:p-24  items-center justify-center'>
 
-        <Textsec1/>
-        <Textsec2/>
-        <Textsec3/>
-        <Textsec4/>
-        <Textsec5/>
+        <h1 className='text-4xl '>
+          AIM : PAM PWM PPM DM PCM
+        </h1>
+        
         </div>
 
 

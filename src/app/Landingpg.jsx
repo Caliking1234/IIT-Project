@@ -6,6 +6,10 @@ import Link from "next/link";
 const Landingpg = () => {
   return (
     <div className="h-full p-4 lg:p-24  items-center justify-center ">
+      <div className="items-center justify-center">
+
+      <h1 className="">Signals And Systems</h1>
+      </div>
       <h1 className="text-[20px] lg:text-[40px] py-6 font-bold">
         List Of Experiments
       </h1>
