@@ -1,10 +1,17 @@
 import Subnavbar from "../../../components/Subnavbar";
 import React from "react";
 
+
 const page = () => {
+  const links = [
+    { label: 'Aim', url: '/experiment1' },
+    { label: 'Theory', url: '/experiment1/theory' },
+    // Add more links as needed
+  ];
   return (
     <div>
-      <Subnavbar />
+      {/* <Subnavbar /> */}
+      <Subnavbar  />
 
       <div className="px-4 lg:px-24 h-full p-4 lg:p-24  items-center justify-center">
         <h1 className="text-4xl font-bold py-8">Feedback</h1>

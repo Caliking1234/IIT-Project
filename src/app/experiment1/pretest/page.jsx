@@ -52,6 +52,13 @@ const questions = [
 ];
 
 function MCQTest() {
+
+  const links = [
+    { label: 'Aim', url: '/experiment1' },
+    { label: 'Theory', url: '/experiment1/theory' },
+    // Add more links as needed
+  ];
+  
   const [selectedOptions, setSelectedOptions] = useState(
     Array(questions.length).fill(-1)
   );
@@ -74,7 +81,7 @@ function MCQTest() {
 
   return (
     <>
-<Subnavbar />
+<Subnavbar  />
    
     <div className="bg-gray-100 h-full p-4">
       <div className="w-full lg:px-24 mx-auto bg-white rounded-md shadow-md p-4">

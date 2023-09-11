@@ -7,9 +7,15 @@ import Textsec5 from "../../../components/Textsec5";
 import Subnavbar from '../../../components/Subnavbar'
 
 const page = () => {
+
+  const links = [
+    { label: 'Aim', url: '/experiment1' },
+    { label: 'Theory', url: '/experiment1/theory' },
+    // Add more links as needed
+  ];
   return (
     <div>
-        <Subnavbar/>
+        <Subnavbar links={links} />
 
       <div className="px-4 lg:px-16">
         <Textsec1 />

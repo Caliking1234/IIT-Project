@@ -67,9 +67,16 @@ const GraphPage = () => {
     setPamSignal(pamSignalData);
   }, [amplitude, carrierFrequency, signalDuration]);
 
+
+  const links = [
+    { label: 'Aim', url: '/experiment1' },
+    { label: 'Theory', url: '/experiment1/theory' },
+    // Add more links as needed
+  ];
+  
   return (
     <>
-      <Subnavbar />
+      <Subnavbar  />
       {!sim ? (
         <div className="flex flex-col justify-center items-center py-10">
           <h1 className=" text-3xl font-bold">Enter Simulation Requirements</h1>
