@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import Subnavbar from "../../../components/Subnavbar";
 
-const page = () => {
+const Page = () => {
   const [sim, setsim] = useState(false);
   const [signalDuration, setsignalDuration] = useState(3);
   const [carrierFrequency, setcarriierfreq] = useState(0.95);
@@ -378,4 +378,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
