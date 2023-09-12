@@ -1,9 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Plot from "react-plotly.js";
+// import Plot from "react-plotly.js";
 import Subnavbar from "../../../components/Subnavbar";
+import dynamic from "next/dynamic";
 
 const Page = () => {
+  const DynamicPlot = dynamic(() => import('react-plotly.js'), {
+  ssr: false // Prevents server-side rendering
+});
   const [sim, setsim] = useState(false);
   const [signalDuration, setsignalDuration] = useState(3);
   const [carrierFrequency, setcarriierfreq] = useState(0.95);
@@ -164,7 +168,7 @@ const Page = () => {
                     fill="#d4fbff"
                     d="M4 304.02c0 4.417 3.578 8 8 8h401.922a8 8 0 0 0 8-8V16.46H4zm0 0"
                     data-original="#d4fbff"
-                    class=""
+                    className=""
                   ></path>
                   <path
                     fill="#ffd7e5"
@@ -202,13 +206,13 @@ const Page = () => {
                     fill="#3a2c60"
                     d="M413.922.46H12c-6.617 0-12 5.384-12 12v291.563c0 6.618 5.383 12 12 12h401.922c6.613 0 12-5.382 12-12v-186.68a4 4 0 0 0-8 0v36.891H347.48c-4.59-24.863-24.406-125.324-48.168-145.773h114.61c2.203 0 4 1.793 4 4v43.887a4 4 0 0 0 8 0V12.46c0-6.621-5.383-12-12-12zm-73.785 161.774c5.68 24.524 30.27 125.305 54.957 145.786H185.695c23.77-20.45 43.586-120.926 48.172-145.786zM177.379 303.711c-13.977 0-38.84-71.418-55.192-141.477h103.54c-13.016 70.028-34.454 141.477-48.348 141.477zm-65.395-149.477H8.445C21.508 84.214 42.988 12.766 56.88 12.766c13.973 0 38.793 71.418 55.105 141.468zM12 8.461h36.559C31.758 22.92 16.895 77.34 8 116.828V12.461c0-2.207 1.793-4 4-4zM8 304.02V162.234h105.973c5.68 24.524 30.27 125.305 54.957 145.786H12c-2.207 0-4-1.793-4-4zm405.922 4h-1.527c1.917-1.641 3.785-3.86 5.527-6.778v2.778c0 2.207-1.797 4-4 4zm4-32.86c-3.219 20.938-10.356 28.55-14.379 28.55-13.977 0-38.84-71.417-55.191-141.476h69.562V275.16zM339.34 154.234H235.805c16.347-70.05 41.21-141.468 55.187-141.468 13.895 0 35.332 71.449 48.348 141.468zm-111.754 0H120.199C114.531 129.7 90.004 28.945 65.336 8.461H282.53c-24.676 20.488-49.261 121.246-54.945 145.773zm0 0"
                     data-original="#3a2c60"
-                    class=""
+                    className=""
                   ></path>
                   <path
                     fill="#3a2c60"
                     d="M421.922 67.844c-2.211 0-4 1.789-4 4v29a4 4 0 0 0 8 0v-29c0-2.207-1.793-4-4-4zm0 0"
                     data-original="#3a2c60"
-                    class=""
+                    className=""
                   ></path>
                 </g>
               </svg>
@@ -248,7 +252,7 @@ const Page = () => {
                       fill="#fdfeff"
                       d="M18 2.25H6a.76.76 0 0 0-.75.75v3a5.75 5.75 0 0 0 2.42 4.68 1.3 1.3 0 0 1 .58 1.05v.54a1.3 1.3 0 0 1-.58 1.05A5.75 5.75 0 0 0 5.25 18v3a.76.76 0 0 0 .75.75h12a.76.76 0 0 0 .75-.75v-3a5.75 5.75 0 0 0-2.42-4.68 1.3 1.3 0 0 1-.58-1.05v-.54a1.3 1.3 0 0 1 .58-1.05A5.75 5.75 0 0 0 18.75 6V3a.76.76 0 0 0-.75-.75z"
                       data-original="#fdfeff"
-                      class=""
+                      className=""
                     ></path>
                     <g fill="#004fac">
                       <path
@@ -291,7 +295,7 @@ const Page = () => {
             <h2 className=" text-xl font-semibold">
               Graph 1: Carrier Signal (Amplitude vs. Time)
             </h2>
-            <Plot
+            <DynamicPlot
               className=" shadow-md shadow-black w-full h-full"
               data={[
                 {
@@ -317,7 +321,7 @@ const Page = () => {
             <h2 className=" text-xl font-semibold">
               Graph 2: Pulse Signal (Amplitude vs. Time)
             </h2>
-            <Plot
+            <DynamicPlot
               className=" shadow-md shadow-black w-full h-full"
               data={[
                 {
@@ -343,7 +347,7 @@ const Page = () => {
             <h2 className=" text-xl font-semibold">
               Graph 3: PAM Signal (Amplitude vs. Time)
             </h2>
-            <Plot
+            <DynamicPlot
               className=" shadow-md shadow-black w-full h-full"
               data={[
                 {
