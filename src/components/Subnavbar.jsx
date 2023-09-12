@@ -6,9 +6,6 @@ import Image from "next/image";
 import open from "../../public/Image/open.jpg";
 import close from "../../public/Image/close.jpg";
 
-// const Subnavbar = () => {
-//   const [navbar, setNavbar] = useState(false);
-
   const Subnavbar = ({ links }) => {
     const [navbar, setNavbar] = useState(false);
   
