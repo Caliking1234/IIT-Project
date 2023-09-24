@@ -14,7 +14,7 @@ const links = [
   { label: "References", url: "/experiment2/reference" },
   { label: "Feedback", url: "/experiment2/feedback" },
 ];
-const page = () => {
+const Page = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Prevents server-side rendering
   });
@@ -481,4 +481,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
