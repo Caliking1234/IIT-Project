@@ -4,7 +4,7 @@ import Subnavbar from "../../../components/Subnavbar";
 import React, { useState } from 'react';
 
 const links = [
-  { label: "Aim", url: "/" },
+  { label: "Aim", url: "/experiment1" },
   { label: "Theory", url: "/experiment1/theory" },
   { label: "Pretest", url: "/experiment1/pretest" },
   { label: "Procedure", url: "/experiment1/procedure" },

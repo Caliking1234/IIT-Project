@@ -2,7 +2,7 @@ import Subnavbar from "../../../components/Subnavbar";
 import React from "react";
 
 const links = [
-  { label: "Aim", url: "/" },
+  { label: "Aim", url: "/experiment2" },
   { label: "Theory", url: "/experiment2/theory" },
   { label: "Pretest", url: "/experiment2/pretest" },
   { label: "Procedure", url: "/experiment2/procedure" },
