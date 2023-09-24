@@ -1,5 +1,5 @@
 import React from 'react'
-import Subnavbar from "../../../components/Subnavbar";
+import Subnavbar from '../../../components/Subnavbar'
 
 const links = [
   { label: "Aim", url: "/" },
@@ -14,18 +14,9 @@ const links = [
 ];
 
 const page = () => {
-
   return (
     <div>
-<Subnavbar links={links} />
-
-      <div className='h-full p-4 lg:p-24  items-center justify-center'>
-        <h1>To simulate Pulse Amplitude Modulation (PAM) in a simple way</h1>
-
-        <p className=''></p>
-      </div>
-        
-
+      <Subnavbar links={links} />
     </div>
   )
 }

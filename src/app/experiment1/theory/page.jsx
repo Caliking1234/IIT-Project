@@ -6,13 +6,20 @@ import Textsec4 from "../../../components/Textsec4";
 import Textsec5 from "../../../components/Textsec5";
 import Subnavbar from '../../../components/Subnavbar'
 
+const links = [
+  { label: "Aim", url: "/" },
+  { label: "Theory", url: "/experiment1/theory" },
+  { label: "Pretest", url: "/experiment1/pretest" },
+  { label: "Procedure", url: "/experiment1/procedure" },
+  { label: "Simulation", url: "/experiment1/simulation" },
+  { label: "Posttest", url: "/experiment1/posttest" },
+  { label: "References", url: "/experiment1/reference" },
+  { label: "Feedback", url: "/experiment1/feedback" },
+
+];
+
 const page = () => {
 
-  const links = [
-    { label: 'Aim', url: '/experiment1' },
-    { label: 'Theory', url: '/experiment1/theory' },
-    // Add more links as needed
-  ];
   return (
     <div>
         <Subnavbar links={links} />

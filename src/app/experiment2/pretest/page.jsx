@@ -3,6 +3,17 @@ import Subnavbar from "../../../components/Subnavbar";
 
 import React, { useState } from 'react';
 
+const links = [
+  { label: "Aim", url: "/" },
+  { label: "Theory", url: "/experiment2/theory" },
+  { label: "Pretest", url: "/experiment2/pretest" },
+  { label: "Procedure", url: "/experiment2/procedure" },
+  { label: "Simulation", url: "/experiment2/simulation" },
+  { label: "Posttest", url: "/experiment2/posttest" },
+  { label: "References", url: "/experiment2/reference" },
+  { label: "Feedback", url: "/experiment2/feedback" },
+
+];
 const questions = [
   {
     question: '1. What does PAM stand for in the context of communication systems?',
@@ -73,14 +84,9 @@ function MCQTest() {
   };
 
 
-  const links = [
-    { label: 'Aim', url: '/experiment1' },
-    { label: 'Theory', url: '/experiment1/theory' },
-    // Add more links as needed
-  ];
   return (
     <>
-{/* <Subnavbar  /> */}
+<Subnavbar links={links} />
    
     <div className="bg-gray-100 h-full p-4">
       <div className="w-full lg:px-24 mx-auto bg-white rounded-md shadow-md p-4">

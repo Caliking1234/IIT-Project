@@ -5,6 +5,19 @@ import Subnavbar from "../../../components/Subnavbar";
 import dynamic from "next/dynamic";
 // import { AnalogInput, arrayValue } from "../../../components/AnalogInput";
 
+
+const links = [
+  { label: "Aim", url: "/" },
+  { label: "Theory", url: "/experiment1/theory" },
+  { label: "Pretest", url: "/experiment1/pretest" },
+  { label: "Procedure", url: "/experiment1/procedure" },
+  { label: "Simulation", url: "/experiment1/simulation" },
+  { label: "Posttest", url: "/experiment1/posttest" },
+  { label: "References", url: "/experiment1/reference" },
+  { label: "Feedback", url: "/experiment1/feedback" },
+
+];
+
 const Page = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Prevents server-side rendering
@@ -231,15 +244,11 @@ const Page = () => {
     numberOfBits,
   ]);
 
-  // const links = [
-  //   { label: "Aim", url: "/experiment1" },
-  //   { label: "Theory", url: "/experiment1/theory" },
-  //   // Add more links as needed
-  // ];
+
 
   return (
     <>
-      <Subnavbar />
+      <Subnavbar links={links} />
 
       {!sim ? (
         <div className="flex flex-col justify-center items-center py-10">
