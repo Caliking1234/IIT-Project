@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 // import Plot from "react-plotly.js";
 import Subnavbar from "../../../components/Subnavbar";
 import dynamic from "next/dynamic";
-// import { AnalogInput, arrayValue } from "../../../components/AnalogInput";
-
 
 const links = [
   { label: "Aim", url: "/experiment1" },
@@ -15,7 +13,6 @@ const links = [
   { label: "Posttest", url: "/experiment1/posttest" },
   { label: "References", url: "/experiment1/reference" },
   { label: "Feedback", url: "/experiment1/feedback" },
-
 ];
 
 const Page = () => {
@@ -243,8 +240,6 @@ const Page = () => {
     stepSize,
     numberOfBits,
   ]);
-
-
 
   return (
     <>
