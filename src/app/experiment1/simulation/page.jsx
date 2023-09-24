@@ -3,19 +3,101 @@ import React, { useEffect, useState } from "react";
 // import Plot from "react-plotly.js";
 import Subnavbar from "../../../components/Subnavbar";
 import dynamic from "next/dynamic";
+// import { AnalogInput, arrayValue } from "../../../components/AnalogInput";
 
 const Page = () => {
-  const DynamicPlot = dynamic(() => import('react-plotly.js'), {
-  ssr: false // Prevents server-side rendering
-});
+  const DynamicPlot = dynamic(() => import("react-plotly.js"), {
+    ssr: false, // Prevents server-side rendering
+  });
   const [sim, setsim] = useState(false);
+  const [type, setType] = useState(0);
   const [signalDuration, setsignalDuration] = useState(3);
   const [carrierFrequency, setcarriierfreq] = useState(0.95);
   const [time, setTime] = useState([]);
   const [carrierSignal, setCarrierSignal] = useState([]);
   const [pulse, setPulse] = useState([]);
   const [pamSignal, setPamSignal] = useState([]);
+  const [pwmSignal, setPwmSignal] = useState([]);
+  const [ppmSignal, setPpmSignal] = useState([]);
+  const [analogSignal, setanalog] = useState([]);
+  const [stepSize, setStepSize] = useState(0.5);
+  const [arrayValue, setArrayValue] = useState([0.5, 0.2, 0.3, 0.4, 0.1]);
+
   const [amplitude, setAmplitude] = useState(1);
+  const [dutyCycle, setDCycle] = useState(50);
+  const [pulsePosition, setPposition] = useState(0.5);
+
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Split the input string by commas to create an array
+    const newArray = inputValue.split(",").map((item) => item.trim());
+    setArrayValue(newArray);
+  };
+
+  const generatePWM = (
+    amplitude,
+    carrierFrequency,
+    signalDuration,
+    dutyCycle
+  ) => {
+    const stepSize = 1 / 1000; // 1000 steps per second
+    const data = [];
+    for (let t = 0; t < signalDuration; t += stepSize) {
+      // Calculate the duty cycle value
+      const dutyCycleValue =
+        t % (1 / carrierFrequency) < dutyCycle / 100 ? 1 : 0;
+      const y = amplitude * dutyCycleValue;
+      data.push(y);
+    }
+    return data;
+  };
+
+  const generatePPM = (
+    amplitude,
+    carrierFrequency,
+    signalDuration,
+    pulsePosition
+  ) => {
+    const stepSize = 1 / 1000; // 1000 steps per second
+    const data = [];
+    for (let t = 0; t < signalDuration; t += stepSize) {
+      // Calculate the pulse position value
+      const pulsePositionValue =
+        Math.abs((t % (1 / carrierFrequency)) - pulsePosition) < stepSize / 2
+          ? 1
+          : 0;
+      const y = amplitude * pulsePositionValue;
+      data.push(y);
+    }
+    return data;
+  };
+
+  const deltaModulation = (analogSignal, stepSize) => {
+    const digitalSignal = [];
+    let previousSample = 0;
+
+    for (const sample of analogSignal) {
+      // Calculate the difference between the current sample and the previous quantized sample
+      const difference = sample - previousSample;
+
+      // Quantize the difference using the step size
+      const quantizedDifference = difference >= 0 ? stepSize : -stepSize;
+
+      // Add the quantized difference to the digital signal
+      digitalSignal.push(quantizedDifference);
+
+      // Update the previous quantized sample
+      previousSample = previousSample + quantizedDifference;
+    }
+
+    return digitalSignal;
+  };
 
   useEffect(() => {
     // Function to generate data for the carrier signal
@@ -65,22 +147,63 @@ const Page = () => {
       (carrierValue, i) => carrierValue * pulseSignalData[i]
     );
 
+    let pwmSignalData = generatePWM(
+      amplitude,
+      carrierFrequency,
+      signalDuration,
+      dutyCycle
+    );
+
+    pwmSignalData = pwmSignalData.map(
+      (carrierValue, i) => carrierValue * pulseSignalData[i]
+    );
+
+    setPwmSignal(pwmSignalData);
+
+    let ppmSignalData = generatePPM(
+      amplitude,
+      carrierFrequency,
+      signalDuration,
+      pulsePosition
+    );
+
+    ppmSignalData = ppmSignalData.map(
+      (carrierValue, i) => carrierValue * pulseSignalData[i]
+    );
+
+    setPpmSignal(ppmSignalData);
+
+    let DMSignal = deltaModulation(arrayValue, stepSize);
+
+    DMSignal = DMSignal.map(
+      (carrierValue, i) => carrierValue * pulseSignalData[i]
+    );
+
+    setanalog(DMSignal);
+
     setTime(timeAxis);
     setCarrierSignal(carrierSignalData);
     setPulse(pulseSignalData);
     setPamSignal(pamSignalData);
-  }, [amplitude, carrierFrequency, signalDuration]);
-
+  }, [
+    amplitude,
+    carrierFrequency,
+    signalDuration,
+    dutyCycle,
+    pulsePosition,
+    stepSize,
+  ]);
 
   const links = [
-    { label: 'Aim', url: '/experiment1' },
-    { label: 'Theory', url: '/experiment1/theory' },
+    { label: "Aim", url: "/experiment1" },
+    { label: "Theory", url: "/experiment1/theory" },
     // Add more links as needed
   ];
-  
+
   return (
     <>
-      <Subnavbar  />
+      <Subnavbar />
+
       {!sim ? (
         <div className="flex flex-col justify-center items-center py-10">
           <h1 className=" text-3xl font-bold">Enter Simulation Requirements</h1>
@@ -276,11 +399,218 @@ const Page = () => {
               </svg>
               <div className="w-0 bg-[#33D7E6] h-[2px] group-focus-within:w-full transition-all duration-300 delay-75"></div>
             </div>
+
+            <div className=" w-full flex gap-2">
+              <select
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option selected>Choose Simulation</option>
+                <option value="1">PAM</option>
+                <option value="2">PWM</option>
+                <option value="3">PPM</option>
+                <option value="4">DM</option>
+                <option value="5">PCM</option>
+              </select>
+            </div>
+            {type == 2 ? (
+              <div className="relative group h-fit">
+                <label
+                  className={
+                    signalDuration
+                      ? "absolute top-[-16px] translate-y-[0] left-[0px] text-xs"
+                      : "absolute top-[50%] translate-y-[-50%] left-[2px] group-focus-within:text-xs group-focus-within:top-[-16px] group-focus-within:translate-y-[0] group-focus-within:left-0 transition-all duration-300 delay-75 "
+                  }
+                >
+                  Duty Cycle(0-100)
+                </label>
+                <input
+                  type="number"
+                  name="Duration"
+                  value={dutyCycle}
+                  onChange={(e) => setDCycle(e.target.value)}
+                  className="text-black h-8 rounded-md p-6 px-4 focus-within:outline-none bg-gray-200"
+                  required
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  version="1.1"
+                  width="512"
+                  height="512"
+                  x="0"
+                  y="0"
+                  viewBox="0 0 24 24"
+                  className=" w-10 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
+                >
+                  <g>
+                    <g data-name="Layer 2">
+                      <path
+                        fill="#fdfeff"
+                        d="M18 2.25H6a.76.76 0 0 0-.75.75v3a5.75 5.75 0 0 0 2.42 4.68 1.3 1.3 0 0 1 .58 1.05v.54a1.3 1.3 0 0 1-.58 1.05A5.75 5.75 0 0 0 5.25 18v3a.76.76 0 0 0 .75.75h12a.76.76 0 0 0 .75-.75v-3a5.75 5.75 0 0 0-2.42-4.68 1.3 1.3 0 0 1-.58-1.05v-.54a1.3 1.3 0 0 1 .58-1.05A5.75 5.75 0 0 0 18.75 6V3a.76.76 0 0 0-.75-.75z"
+                        data-original="#fdfeff"
+                        className=""
+                      ></path>
+                      <g fill="#004fac">
+                        <path
+                          d="M18 22.75H6a.76.76 0 0 1-.75-.75v-4a5.75 5.75 0 0 1 2.42-4.68 1.3 1.3 0 0 0 .58-1.05v-.54a1.3 1.3 0 0 0-.58-1.05A5.75 5.75 0 0 1 5.25 6V2A.76.76 0 0 1 6 1.25h12a.75.75 0 0 1 0 1.5H6.75V6a4.26 4.26 0 0 0 1.79 3.46 2.78 2.78 0 0 1 1.21 2.27v.54a2.78 2.78 0 0 1-1.21 2.27A4.26 4.26 0 0 0 6.75 18v3.25h10.5V18a4.26 4.26 0 0 0-1.79-3.46 2.78 2.78 0 0 1-1.21-2.27v-.54a2.78 2.78 0 0 1 1.21-2.27A4.26 4.26 0 0 0 17.25 6V5a.75.75 0 0 1 1.5 0v1a5.75 5.75 0 0 1-2.42 4.68 1.3 1.3 0 0 0-.58 1.05v.54a1.3 1.3 0 0 0 .58 1.05A5.75 5.75 0 0 1 18.75 18v4a.76.76 0 0 1-.75.75z"
+                          fill="#004fac"
+                          data-original="#004fac"
+                        ></path>
+                        <path
+                          d="M20 2.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5zM20 22.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5z"
+                          fill="#004fac"
+                          data-original="#004fac"
+                        ></path>
+                      </g>
+                      <path
+                        fill="#3e96ed"
+                        d="M9 20h6a1 1 0 0 0 1-1v-1.17a2 2 0 0 0-.59-1.42l-2.7-2.7a1 1 0 0 0-1.42 0l-2.7 2.7A2 2 0 0 0 8 17.83V19a1 1 0 0 0 1 1z"
+                        data-original="#3e96ed"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+                <div className="w-0 bg-[#33D7E6] h-[2px] group-focus-within:w-full transition-all duration-300 delay-75"></div>
+              </div>
+            ) : (
+              <></>
+            )}
+            {type == 3 ? (
+              <div className="relative group h-fit">
+                <label
+                  className={
+                    signalDuration
+                      ? "absolute top-[-16px] translate-y-[0] left-[0px] text-xs"
+                      : "absolute top-[50%] translate-y-[-50%] left-[2px] group-focus-within:text-xs group-focus-within:top-[-16px] group-focus-within:translate-y-[0] group-focus-within:left-0 transition-all duration-300 delay-75 "
+                  }
+                >
+                  Pulse Position(0-1)
+                </label>
+                <input
+                  type="number"
+                  name="Duration"
+                  value={pulsePosition}
+                  onChange={(e) => setPposition(e.target.value)}
+                  className="text-black h-8 rounded-md p-6 px-4 focus-within:outline-none bg-gray-200"
+                  required
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  version="1.1"
+                  width="512"
+                  height="512"
+                  x="0"
+                  y="0"
+                  viewBox="0 0 24 24"
+                  className=" w-10 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
+                >
+                  <g>
+                    <g data-name="Layer 2">
+                      <path
+                        fill="#fdfeff"
+                        d="M18 2.25H6a.76.76 0 0 0-.75.75v3a5.75 5.75 0 0 0 2.42 4.68 1.3 1.3 0 0 1 .58 1.05v.54a1.3 1.3 0 0 1-.58 1.05A5.75 5.75 0 0 0 5.25 18v3a.76.76 0 0 0 .75.75h12a.76.76 0 0 0 .75-.75v-3a5.75 5.75 0 0 0-2.42-4.68 1.3 1.3 0 0 1-.58-1.05v-.54a1.3 1.3 0 0 1 .58-1.05A5.75 5.75 0 0 0 18.75 6V3a.76.76 0 0 0-.75-.75z"
+                        data-original="#fdfeff"
+                        className=""
+                      ></path>
+                      <g fill="#004fac">
+                        <path
+                          d="M18 22.75H6a.76.76 0 0 1-.75-.75v-4a5.75 5.75 0 0 1 2.42-4.68 1.3 1.3 0 0 0 .58-1.05v-.54a1.3 1.3 0 0 0-.58-1.05A5.75 5.75 0 0 1 5.25 6V2A.76.76 0 0 1 6 1.25h12a.75.75 0 0 1 0 1.5H6.75V6a4.26 4.26 0 0 0 1.79 3.46 2.78 2.78 0 0 1 1.21 2.27v.54a2.78 2.78 0 0 1-1.21 2.27A4.26 4.26 0 0 0 6.75 18v3.25h10.5V18a4.26 4.26 0 0 0-1.79-3.46 2.78 2.78 0 0 1-1.21-2.27v-.54a2.78 2.78 0 0 1 1.21-2.27A4.26 4.26 0 0 0 17.25 6V5a.75.75 0 0 1 1.5 0v1a5.75 5.75 0 0 1-2.42 4.68 1.3 1.3 0 0 0-.58 1.05v.54a1.3 1.3 0 0 0 .58 1.05A5.75 5.75 0 0 1 18.75 18v4a.76.76 0 0 1-.75.75z"
+                          fill="#004fac"
+                          data-original="#004fac"
+                        ></path>
+                        <path
+                          d="M20 2.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5zM20 22.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5z"
+                          fill="#004fac"
+                          data-original="#004fac"
+                        ></path>
+                      </g>
+                      <path
+                        fill="#3e96ed"
+                        d="M9 20h6a1 1 0 0 0 1-1v-1.17a2 2 0 0 0-.59-1.42l-2.7-2.7a1 1 0 0 0-1.42 0l-2.7 2.7A2 2 0 0 0 8 17.83V19a1 1 0 0 0 1 1z"
+                        data-original="#3e96ed"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+                <div className="w-0 bg-[#33D7E6] h-[2px] group-focus-within:w-full transition-all duration-300 delay-75"></div>
+              </div>
+            ) : type == 4 ? (
+              <form onSubmit={handleSubmit} className=" flex flex-col">
+                <label>Enter comma-separated values:</label>
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                />
+                <div className="relative group h-fit">
+                  <label
+                    className={
+                      signalDuration
+                        ? "absolute top-[-16px] translate-y-[0] left-[0px] text-xs"
+                        : "absolute top-[50%] translate-y-[-50%] left-[2px] group-focus-within:text-xs group-focus-within:top-[-16px] group-focus-within:translate-y-[0] group-focus-within:left-0 transition-all duration-300 delay-75 "
+                    }
+                  >
+                    Pulse Position(0-1)
+                  </label>
+                  <input
+                    type="number"
+                    name="Duration"
+                    value={stepSize}
+                    onChange={(e) => setStepSize(e.target.value)}
+                    className="text-black h-8 rounded-md p-6 px-4 focus-within:outline-none bg-gray-200"
+                    required
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    version="1.1"
+                    width="512"
+                    height="512"
+                    x="0"
+                    y="0"
+                    viewBox="0 0 24 24"
+                    className=" w-10 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
+                  >
+                    <g>
+                      <g data-name="Layer 2">
+                        <path
+                          fill="#fdfeff"
+                          d="M18 2.25H6a.76.76 0 0 0-.75.75v3a5.75 5.75 0 0 0 2.42 4.68 1.3 1.3 0 0 1 .58 1.05v.54a1.3 1.3 0 0 1-.58 1.05A5.75 5.75 0 0 0 5.25 18v3a.76.76 0 0 0 .75.75h12a.76.76 0 0 0 .75-.75v-3a5.75 5.75 0 0 0-2.42-4.68 1.3 1.3 0 0 1-.58-1.05v-.54a1.3 1.3 0 0 1 .58-1.05A5.75 5.75 0 0 0 18.75 6V3a.76.76 0 0 0-.75-.75z"
+                          data-original="#fdfeff"
+                          className=""
+                        ></path>
+                        <g fill="#004fac">
+                          <path
+                            d="M18 22.75H6a.76.76 0 0 1-.75-.75v-4a5.75 5.75 0 0 1 2.42-4.68 1.3 1.3 0 0 0 .58-1.05v-.54a1.3 1.3 0 0 0-.58-1.05A5.75 5.75 0 0 1 5.25 6V2A.76.76 0 0 1 6 1.25h12a.75.75 0 0 1 0 1.5H6.75V6a4.26 4.26 0 0 0 1.79 3.46 2.78 2.78 0 0 1 1.21 2.27v.54a2.78 2.78 0 0 1-1.21 2.27A4.26 4.26 0 0 0 6.75 18v3.25h10.5V18a4.26 4.26 0 0 0-1.79-3.46 2.78 2.78 0 0 1-1.21-2.27v-.54a2.78 2.78 0 0 1 1.21-2.27A4.26 4.26 0 0 0 17.25 6V5a.75.75 0 0 1 1.5 0v1a5.75 5.75 0 0 1-2.42 4.68 1.3 1.3 0 0 0-.58 1.05v.54a1.3 1.3 0 0 0 .58 1.05A5.75 5.75 0 0 1 18.75 18v4a.76.76 0 0 1-.75.75z"
+                            fill="#004fac"
+                            data-original="#004fac"
+                          ></path>
+                          <path
+                            d="M20 2.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5zM20 22.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5z"
+                            fill="#004fac"
+                            data-original="#004fac"
+                          ></path>
+                        </g>
+                        <path
+                          fill="#3e96ed"
+                          d="M9 20h6a1 1 0 0 0 1-1v-1.17a2 2 0 0 0-.59-1.42l-2.7-2.7a1 1 0 0 0-1.42 0l-2.7 2.7A2 2 0 0 0 8 17.83V19a1 1 0 0 0 1 1z"
+                          data-original="#3e96ed"
+                        ></path>
+                      </g>
+                    </g>
+                  </svg>
+                  <div className="w-0 bg-[#33D7E6] h-[2px] group-focus-within:w-full transition-all duration-300 delay-75"></div>
+                </div>
+              </form>
+            ) : (
+              <></>
+            )}
           </div>
           <button
             onClick={() => {
               setsim(true);
             }}
+            type="submit"
             className=" w-[200px] font-bold py-3 px-3 text-white hover:text-[#33D7E6] bg-[#33D7E6] rounded-md hover:bg-white hover:border-[#33D7E6] border-2"
           >
             Simulate
@@ -288,9 +618,9 @@ const Page = () => {
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center py-10 gap-y-10">
-          <h1 className=" text-3xl font-bold">
+          {/* <h1 className=" text-3xl font-bold">
             Pulse Amplitude Modulation (PAM)
-          </h1>
+          </h1> */}
           <div className="flex flex-col items-center justify-center gap-5 w-full px-5">
             <h2 className=" text-xl font-semibold">
               Graph 1: Carrier Signal (Amplitude vs. Time)
@@ -342,32 +672,112 @@ const Page = () => {
               }}
             />
           </div>
+          {type == 1 ? (
+            <div className="flex flex-col items-center justify-center gap-5 w-full px-5">
+              <h2 className=" text-xl font-semibold">
+                Graph 3: PAM Signal (Amplitude vs. Time)
+              </h2>
+              <DynamicPlot
+                className=" shadow-md shadow-black w-full h-full"
+                data={[
+                  {
+                    type: "scatter",
+                    mode: "lines",
+                    x: time,
+                    y: pamSignal,
+                    name: "PAM Signal",
+                  },
+                ]}
+                layout={{
+                  title: "PAM Signal",
+                  xaxis: { title: "Time (s)" },
+                  yaxis: {
+                    title: "Amplitude",
+                    range: [-2 * amplitude, 2 * amplitude],
+                  },
+                }}
+              />
+            </div>
+          ) : type == 2 ? (
+            <div className="flex flex-col items-center justify-center gap-5 w-full px-5">
+              <h2 className=" text-xl font-semibold">
+                Graph 3: PWM Signal (Amplitude vs. Time)
+              </h2>
+              <DynamicPlot
+                className=" shadow-md shadow-black w-full h-full"
+                data={[
+                  {
+                    type: "scatter",
+                    mode: "lines",
+                    x: time,
+                    y: pwmSignal,
+                    name: "PWM Signal",
+                  },
+                ]}
+                layout={{
+                  title: "PWM Signal",
+                  xaxis: { title: "Time (s)" },
+                  yaxis: {
+                    title: "Amplitude",
+                    range: [-2 * amplitude, 2 * amplitude],
+                  },
+                }}
+              />
+            </div>
+          ) : type == 3 ? (
+            <div className="flex flex-col items-center justify-center gap-5 w-full px-5">
+              <h2 className=" text-xl font-semibold">
+                Graph 3: PPM Signal (Amplitude vs. Time)
+              </h2>
+              <DynamicPlot
+                className=" shadow-md shadow-black w-full h-full"
+                data={[
+                  {
+                    type: "scatter",
+                    mode: "lines",
+                    x: time,
+                    y: ppmSignal,
+                    name: "PPM Signal",
+                  },
+                ]}
+                layout={{
+                  title: "PPM Signal",
+                  xaxis: { title: "Time (s)" },
+                  yaxis: {
+                    title: "Amplitude",
+                    range: [-2 * amplitude, 2 * amplitude],
+                  },
+                }}
+              />
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center gap-5 w-full px-5">
+              <h2 className=" text-xl font-semibold">
+                Graph 3: DM Signal (Amplitude vs. Time)
+              </h2>
+              <DynamicPlot
+                className=" shadow-md shadow-black w-full h-full"
+                data={[
+                  {
+                    type: "scatter",
+                    mode: "lines",
+                    x: time,
+                    y: analogSignal,
+                    name: "DM Signal",
+                  },
+                ]}
+                layout={{
+                  title: "DM Signal",
+                  xaxis: { title: "Time (s)" },
+                  yaxis: {
+                    title: "Amplitude",
+                    range: [-2 * amplitude, 2 * amplitude],
+                  },
+                }}
+              />
+            </div>
+          )}
 
-          <div className="flex flex-col items-center justify-center gap-5 w-full px-5">
-            <h2 className=" text-xl font-semibold">
-              Graph 3: PAM Signal (Amplitude vs. Time)
-            </h2>
-            <DynamicPlot
-              className=" shadow-md shadow-black w-full h-full"
-              data={[
-                {
-                  type: "scatter",
-                  mode: "lines",
-                  x: time,
-                  y: pamSignal,
-                  name: "PAM Signal",
-                },
-              ]}
-              layout={{
-                title: "PAM Signal",
-                xaxis: { title: "Time (s)" },
-                yaxis: {
-                  title: "Amplitude",
-                  range: [-2 * amplitude, 2 * amplitude],
-                },
-              }}
-            />
-          </div>
           <button
             onClick={() => {
               setsim(false);
