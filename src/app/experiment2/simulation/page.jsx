@@ -419,7 +419,7 @@ const page = () => {
           </div>
           <div className="flex flex-col items-center justify-center gap-5 w-full px-5">
             <h2 className=" text-xl font-semibold">
-              Graph 2: Pulse Signal (Amplitude vs. Time)
+              Graph 2: Modulation Signal (Amplitude vs. Time)
             </h2>
             <DynamicPlot
               className=" shadow-md shadow-black w-full h-full"
