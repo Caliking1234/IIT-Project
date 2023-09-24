@@ -142,7 +142,7 @@ const page = () => {
                     : "absolute top-[50%] translate-y-[-50%] left-[2px] group-focus-within:text-xs group-focus-within:top-[-16px] group-focus-within:translate-y-[0] group-focus-within:left-0 transition-all duration-300 delay-75 "
                 }
               >
-                Frequency(in Hz)
+                Carrier Frequency(in Hz)
               </label>
               <input
                 type="number"
