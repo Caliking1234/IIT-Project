@@ -11,7 +11,7 @@ const page = () => {
   return (
     <div>
       
-      <Subnavbar  />
+      {/* <Subnavbar  /> */}
 
       <div className="px-4 lg:px-24 h-full p-4 lg:p-24  items-center justify-center">
         <h1 className="text-4xl font-bold py-8">Feedback</h1>

@@ -231,11 +231,11 @@ const Page = () => {
     numberOfBits,
   ]);
 
-  const links = [
-    { label: "Aim", url: "/experiment1" },
-    { label: "Theory", url: "/experiment1/theory" },
-    // Add more links as needed
-  ];
+  // const links = [
+  //   { label: "Aim", url: "/experiment1" },
+  //   { label: "Theory", url: "/experiment1/theory" },
+  //   // Add more links as needed
+  // ];
 
   return (
     <>
