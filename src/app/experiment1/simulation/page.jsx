@@ -14,7 +14,7 @@ const links = [
   { label: "Feedback", url: "/experiment1/feedback" },
 ];
 
-const page = () => {
+const Page = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Prevents server-side rendering
   });
@@ -795,68 +795,6 @@ const page = () => {
             </svg>
             <div className="w-0 bg-[#33D7E6] h-[2px] group-focus-within:w-full transition-all duration-300 delay-75"></div>
           </div>
-          {/* {type == 2 ? (
-            <div className="relative group h-fit">
-              <label
-                className={
-                  signalDuration
-                    ? "absolute top-[-16px] translate-y-[0] left-[0px] text-xs"
-                    : "absolute top-[50%] translate-y-[-50%] left-[2px] group-focus-within:text-xs group-focus-within:top-[-16px] group-focus-within:translate-y-[0] group-focus-within:left-0 transition-all duration-300 delay-75 "
-                }
-              >
-                Duty Cycle(0-100)
-              </label>
-              <input
-                type="number"
-                name="Duration"
-                value={dutyCycle}
-                onChange={(e) => setDCycle(e.target.value)}
-                className="text-black h-8 rounded-md p-6 px-4 focus-within:outline-none bg-gray-200"
-                required
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                version="1.1"
-                width="512"
-                height="512"
-                x="0"
-                y="0"
-                viewBox="0 0 24 24"
-                className=" w-10 h-5  absolute top-[50%] translate-y-[-50%] right-[2px] "
-              >
-                <g>
-                  <g data-name="Layer 2">
-                    <path
-                      fill="#fdfeff"
-                      d="M18 2.25H6a.76.76 0 0 0-.75.75v3a5.75 5.75 0 0 0 2.42 4.68 1.3 1.3 0 0 1 .58 1.05v.54a1.3 1.3 0 0 1-.58 1.05A5.75 5.75 0 0 0 5.25 18v3a.76.76 0 0 0 .75.75h12a.76.76 0 0 0 .75-.75v-3a5.75 5.75 0 0 0-2.42-4.68 1.3 1.3 0 0 1-.58-1.05v-.54a1.3 1.3 0 0 1 .58-1.05A5.75 5.75 0 0 0 18.75 6V3a.76.76 0 0 0-.75-.75z"
-                      data-original="#fdfeff"
-                      className=""
-                    ></path>
-                    <g fill="#004fac">
-                      <path
-                        d="M18 22.75H6a.76.76 0 0 1-.75-.75v-4a5.75 5.75 0 0 1 2.42-4.68 1.3 1.3 0 0 0 .58-1.05v-.54a1.3 1.3 0 0 0-.58-1.05A5.75 5.75 0 0 1 5.25 6V2A.76.76 0 0 1 6 1.25h12a.75.75 0 0 1 0 1.5H6.75V6a4.26 4.26 0 0 0 1.79 3.46 2.78 2.78 0 0 1 1.21 2.27v.54a2.78 2.78 0 0 1-1.21 2.27A4.26 4.26 0 0 0 6.75 18v3.25h10.5V18a4.26 4.26 0 0 0-1.79-3.46 2.78 2.78 0 0 1-1.21-2.27v-.54a2.78 2.78 0 0 1 1.21-2.27A4.26 4.26 0 0 0 17.25 6V5a.75.75 0 0 1 1.5 0v1a5.75 5.75 0 0 1-2.42 4.68 1.3 1.3 0 0 0-.58 1.05v.54a1.3 1.3 0 0 0 .58 1.05A5.75 5.75 0 0 1 18.75 18v4a.76.76 0 0 1-.75.75z"
-                        fill="#004fac"
-                        data-original="#004fac"
-                      ></path>
-                      <path
-                        d="M20 2.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5zM20 22.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5z"
-                        fill="#004fac"
-                        data-original="#004fac"
-                      ></path>
-                    </g>
-                    <path
-                      fill="#3e96ed"
-                      d="M9 20h6a1 1 0 0 0 1-1v-1.17a2 2 0 0 0-.59-1.42l-2.7-2.7a1 1 0 0 0-1.42 0l-2.7 2.7A2 2 0 0 0 8 17.83V19a1 1 0 0 0 1 1z"
-                      data-original="#3e96ed"
-                    ></path>
-                  </g>
-                </g>
-              </svg>
-              <div className="w-0 bg-[#33D7E6] h-[2px] group-focus-within:w-full transition-all duration-300 delay-75"></div>
-            </div>
-          ) : (
-            <></>
-          )} */}
           {type == 3 ? (
             <div className="relative group h-fit">
               <label
@@ -1059,4 +997,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
