@@ -997,4 +997,4 @@ const Page = () => {
   );
 };
 
-export default age;
+export default Page;
