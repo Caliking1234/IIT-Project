@@ -14,7 +14,7 @@ const links = [
   { label: "Feedback", url: "/experiment1/feedback" },
 ];
 
-const age = () => {
+const Page = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Prevents server-side rendering
   });
