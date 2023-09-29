@@ -5,25 +5,24 @@ import Textsec3 from "../../../components/Textsec3";
 import Textsec4 from "../../../components/Textsec4";
 import Textsec5 from "../../../components/Textsec5";
 import Subnavbar from '../../../components/Subnavbar'
-import Test from "./Test"
 
-const links = [
-  { label: "Aim", url: "/experiment1" },
-  { label: "Theory", url: "/experiment1/theory" },
-  { label: "Pretest", url: "/experiment1/pretest" },
-  { label: "Procedure", url: "/experiment1/procedure" },
-  { label: "Simulation", url: "/experiment1/simulation" },
-  { label: "Posttest", url: "/experiment1/posttest" },
-  { label: "References", url: "/experiment1/reference" },
-  { label: "Feedback", url: "/experiment1/feedback" },
 
-];
+// const links = [
+//   { label: "Aim", url: "/experiment1" },
+//   { label: "Theory", url: "/experiment1/theory" },
+//   { label: "Pretest", url: "/experiment1/pretest" },
+//   { label: "Procedure", url: "/experiment1/procedure" },
+//   { label: "Simulation", url: "/experiment1/simulation" },
+//   { label: "Posttest", url: "/experiment1/posttest" },
+//   { label: "References", url: "/experiment1/reference" },
+//   { label: "Feedback", url: "/experiment1/feedback" },
+
+// ];
 
 const page = () => {
 
   return (
     <div>
-        {/* <Subnavbar links={links} /> */}
 
       <div className="lg:p-24 px-6">
         <p className="text-xl lg:text-4xl my-6 py-2 border-b-4">THEORY FOR :</p>
@@ -53,12 +52,7 @@ const page = () => {
         <p><a href="/experiment1/theory/pcm" className=" hover:text-green-400" >Click here for PCM theory</a></p>
 
 </div>
-        {/* <Textsec1 />
-        <Textsec2 />
-        <Textsec3 />
-        <Textsec4 />
-        <Textsec5 /> */}
-        
+
         
       </div>
     </div>
