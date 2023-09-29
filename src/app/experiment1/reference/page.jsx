@@ -16,7 +16,7 @@ const links = [
 const page = () => {
   return (
     <div>
-      <Subnavbar links={links} />
+      {/* <Subnavbar links={links} /> */}
     </div>
   )
 }

@@ -1,53 +1,14 @@
-import React from "react";
+import React from 'react'
 import Image from "next/image";
-import Img4 from "../../public/Image/img4.png";
-import Img5 from "../../public/Image/img5.png";
-import Img6 from "../../public/Image/img6.png";
+import Img4 from "../../../../../public/Image/img4.png";
+import Img5 from "../../../../../public/Image/img5.png";
+import Img6 from "../../../../../public/Image/img6.png";
 
-const Textsec2 = () => {
+const page = () => {
   return (
-    <div className="">
-      <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">
-        Demodulation
-      </h1>
-      <p className="pb-6">
-        Demodulation is performed by detecting the amplitude level of the
-        carrier at every single period. The number of possible pulse amplitudes
-        in analog PAM is theoretically infinite. Digital PAM reduces the number
-        of pulse amplitudes to some power of two. For example, in 4-level PAM
-        there are 22 possible discrete pulse amplitudes; in 8-level PAM there
-        are 23 possible discrete pulse amplitudes; and in 16-level PAM there are
-        24 possible discrete pulse amplitudes.
-      </p>
-
-      <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">
-        Applications
-      </h1>
-      <p className="pb-6">
-        The translation of a DT signal to a CT signal appropriate for
-        transmission, and the translation back to a DT signal at the receiver,
-        are both accomplished by devices referred to as modems
-        (modulators/demodulators). Pulse Amplitude Modulation (PAM) underlies
-        the operation of a wide variety of modems.
-      </p>
-      <p className="pb-6">
-        Power consumption is low in pulse modulation. Explanation: In pulse
-        modulation, the carrier is not transmitted continuously but in pulses
-        whose width is determined by the amplitude of the modulating signal.
-      </p>
-
-      <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">
-        Effect of Noise on Pulse Amplitude Modulation
-      </h1>
-      <p className="pb-6">
-        The frequency varies according to the modulating signal or message
-        signal. Due to these variations in the signal frequency, interferences
-        will be there. So the noise will be great. For PAM, noise immunity is
-        less when compared to other modulation techniques. It is almost equal to
-        amplitude modulation.
-      </p>
-
-      {/* -----------------pwm-------------------------------- */}
+    <div>
+        <div className="p-4 lg:p-8 lg:w-[70%] mx-auto">
+            {/* -----------------pwm-------------------------------- */}
 
       <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">
         Pulse-width Modulation (PWM)
@@ -124,8 +85,9 @@ const Textsec2 = () => {
         reference signal is more than the modulation waveform, the PWM signal
         (magenta) is in the high state, otherwise, it is in the low state.
       </p>
+        </div>
     </div>
-  );
-};
+  )
+}
 
-export default Textsec2;
+export default page

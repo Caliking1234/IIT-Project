@@ -248,7 +248,7 @@ const Page = () => {
 
   return (
     <>
-      <Subnavbar links={links} />
+      {/* <Subnavbar links={links} /> */}
 
       {!sim ? (
         <div className="flex flex-col justify-center items-center py-10">

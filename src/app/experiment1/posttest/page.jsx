@@ -87,7 +87,7 @@ function MCQTest() {
 
   return (
     <>
-<Subnavbar links={links} />
+{/* <Subnavbar links={links} /> */}
    
     <div className="bg-gray-100 h-full p-4">
       <div className="w-full lg:px-24 mx-auto bg-white rounded-md shadow-md p-4">

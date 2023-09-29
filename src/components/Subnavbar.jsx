@@ -163,6 +163,7 @@ import close from "../../public/Image/close.jpg";
                 <ul className="h-screen py-4 md:h-auto items-center justify-center md:flex ">
                   {links.map((link, index) => (
                     <li
+                    // key={item.id}
                       key={index}
                       className={`pb-6 text-xl hover:underline text-gray-600 py-2 md:px-6 text-center border-b-2 md:border-b-0 hover:bg-green-300 border-white-900 md:hover:text-white md:hover:bg-transparent`}
                     >
