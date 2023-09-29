@@ -169,7 +169,7 @@ const Page = () => {
   return (
     <div className=" w-full h-fit bg-gray-200">
       <Subnavbar links={links} />
-      <div className=" grid grid-cols-2 w-full gap-2 py-5">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 w-full gap-2 py-5">
         <div className=" w-full flex flex-col px-2">
           <DynamicPlot
             className=" shadow-md shadow-black w-full h-full px-2"
