@@ -21,7 +21,7 @@ const page = () => {
   const [type, setType] = useState(1);
   const [pulseType, setPulseType] = useState(1);
 
-  const [signalDuration, setsignalDuration] = useState(5);
+  const [signalDuration, setsignalDuration] = useState(15);
   const [carrierFrequency, setcarriierfreq] = useState(0.5);
   const [frequency, setfreq] = useState(0.2);
   const [time, setTime] = useState([]);
