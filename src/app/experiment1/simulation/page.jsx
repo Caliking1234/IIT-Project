@@ -14,7 +14,7 @@ const links = [
   { label: "Feedback", url: "/experiment1/feedback" },
 ];
 
-const Page = () => {
+const age = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Prevents server-side rendering
   });
@@ -546,7 +546,7 @@ const Page = () => {
             </svg>
             <div className="w-0 bg-[#33D7E6] h-[2px] group-focus-within:w-full transition-all duration-300 delay-75"></div>
           </div>
-          {type == 1 ? (
+          {type == 1 || (type == 2 && pulseType == 2) ? (
             <div className="relative group h-fit">
               <label
                 className={
@@ -997,4 +997,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default age;
