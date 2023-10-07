@@ -36,12 +36,12 @@ const page = () => {
           with the sequence of pulse amplitudes carrying the information.
         </p>
 
-        <div className="px-24 py-8">
-          <Image className="py-8" src={Img2} />
-          <p className="font-bold ">Fig: Block Diagram of PAM Generation</p>
+        <div className="lg:px-24 lg:py-8 text-center justify-center mx-auto">
+          <Image className="py-8 " src={Img2} />
+          <p className=" text-sm font-semibold ">Fig: Block Diagram of PAM Generation</p>
 
-          <Image className="py-8 px-12" src={Img3} />
-          <p className="font-bold ">Fig: Pulse Amplitude Modulation Signal</p>
+          <Image className="py-8 lg:px-12" src={Img3} />
+          <p className="text-sm font-semibold ">Fig: Pulse Amplitude Modulation Signal</p>
         </div>
 
         <p className="pb-6">

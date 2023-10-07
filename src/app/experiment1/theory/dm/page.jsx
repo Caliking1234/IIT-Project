@@ -28,9 +28,9 @@ const page = () => {
         Generation of Delta Modulated Signal
       </h1>
 
-      <div className="px-24 py-8">
+      <div className="lg:px-24 py-8 text-center justify-center mx-auto">
         <Image className="py-8" src={Img13} />
-        <span className="font-bold">
+        <span className="text-sm font-semibold">
           Fig: Delta Modulation and Demodulation
         </span>
       </div>
@@ -42,9 +42,9 @@ const page = () => {
         simplest possible quantizer i.e. two-level or one-bit quantizer.{" "}
       </p>
 
-      <div className="px-24 py-8">
+      <div className="lg:px-24 py-8 text-center justify-center mx-auto">
         <Image className="py-8" src={Img14} />
-        <span className="font-bold">
+        <span className="text-sm font-semibold">
           Fig: Waveform representation of delta modulation where m(t) is the
           analog signal and u(t) is the staircase function.
         </span>
@@ -75,9 +75,9 @@ const page = () => {
 
       <p className="text-xl pb-4 font-bold ">1. Granular noise</p>
 
-      <div className="px-24 py-8">
+      <div className="lg:px-24 pb-8 text-center justify-center mx-auto">
         <Image className="py-8" src={Img15} />
-        <span className="font-bold">
+        <span className="text-sm font-semibold">
           Fig: Delta Modulation where x(t) is the analog signal and u(t) is the
           staircase function.
         </span>

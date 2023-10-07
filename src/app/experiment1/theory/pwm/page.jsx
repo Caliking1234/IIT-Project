@@ -19,7 +19,7 @@ const page = () => {
         signal.{" "}
       </p>
 
-      <div className="px-24 py-8">
+      <div className="lg:px-24 py-8">
         <Image className="" src={Img4} />
       </div>
 
@@ -48,11 +48,11 @@ const page = () => {
         and off states more often than not.
       </p>
 
-      <div className="px-24 py-8">
+      <div className="lg:px-24 py-8 text-center justify-center mx-auto">
 
       <Image className="pt-8" src={Img5} />
       <Image className="pb-8" src={Img6} />
-      <span className="font-bold">Fig: Duty cycle of 75%, 25%, and 50%</span>
+      <span className="text-sm font-semibold">Fig: Duty cycle of 75%, 25%, and 50%</span>
       </div>
 
       <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">

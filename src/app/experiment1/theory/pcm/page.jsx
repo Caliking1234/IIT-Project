@@ -43,7 +43,7 @@ const page = () => {
       </p>
 
       <p className="font-bold">Bit rate and bandwidth requirements of PCM</p>
-      <ul className="px-16 py-6">
+      <ul className="lg:px-16 py-6">
         <li className="pb-4">
           • The bit rate of a PCM signal can be calculated form the number of
           bits per sample × the sampling rate. Bit rate =𝑛𝑏×𝑓𝑠. The bandwidth
@@ -91,9 +91,9 @@ const page = () => {
 
       <h1 className="text-xl pb-4 font-bold">Basic Elements of PCM</h1>
 
-      <div className="lg:px-24 py-8">
-        <Image className="" src={Img18} />
-        <span className="font-bold">Fig: Pulse Code Modulation</span>
+      <div className="lg:px-24 py-8 text-center justify-center mx-auto">
+        <Image className="pb-8" src={Img18} />
+        <span className="text-sm font-semibold">Fig: Pulse Code Modulation</span>
       </div>
 
       <h1 className="text-xl pb-4 font-bold">Pulse Code Modulation</h1>
@@ -138,9 +138,9 @@ const page = () => {
         transmit the exact amplitudes of the samples. Any human sense (the ear
         or the eye), as an ultimate receiver, can detect only finite intensity
         differences.
-        <div className="lg:px-24 py-8">
-          <Image className="" src={Img19} />
-          <span className="font-bold">
+        <div className="lg:px-24 py-8 text-center justify-center mx-auto">
+          <Image className="pb-8 lg:h-[20vh] w-full" src={Img19} />
+          <span className="text-sm font-semibold">
             Fig: Description of a memoryless quantizer
           </span>
         </div>
@@ -181,7 +181,7 @@ const page = () => {
       <h1 className="text-xl pb-4 font-bold">1. Mid treed Quantizer</h1>
 
       <div className="lg:px-24 py-8">
-        <Image className="" src={Img20} />
+        <Image className="h-[30vh] lg:h-[60vh] " src={Img20} />
         {/* <span className="font-bold">Fig: Description of a memoryless quantizer</span> */}
       </div>
 
@@ -198,9 +198,9 @@ const page = () => {
       </p>
 
       <h1 className="text-xl pb-4 font-bold">2. Mid-Rise Quantizer:-</h1>
-      <div className="lg:px-24 py-8">
-        <Image className="" src={Img21} />
-        <span className="font-bold">Fig: Mid-Rise Quantizer</span>
+      <div className="lg:px-24 py-8 text-center justify-center mx-auto">
+        <Image className="h-[30vh] lg:h-[60vh] pb-8" src={Img21} />
+        <span className=" text-sm font-semibold">Fig: Mid-Rise Quantizer</span>
       </div>
       <p className="pb-6">
         In mid-rise quantizer the input values are ± Δ,± 2Δ,± 3Δ,….. the

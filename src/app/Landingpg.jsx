@@ -58,7 +58,7 @@ const Landingpg = () => {
         </Link>
         <Link
           className="bg-red-200 p-4 lg:p-8 text-[30px] font-bold rounded-md hover:text-red-700"
-          href="/"
+          href="/experiment7"
         >
           {" "}
           Experiment 7

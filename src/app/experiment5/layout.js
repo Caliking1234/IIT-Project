@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
         <Navbar/>
         <Subnavbar links={links}/>
         {children}
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
