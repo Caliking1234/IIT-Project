@@ -4,6 +4,8 @@ import Image from "next/image";
 
 import Img3 from "../../../../public/Image/pamimg.png";
 
+
+
 const Test = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -11,21 +13,16 @@ const Test = () => {
 
   const buttonClass = isClicked ? "bg-green-500" : "bg-red-500";
 
-  const toggleBox = () => {
-    setShowBox(!showBox);
-  };
+  
   const handleButtonClick = () => {
     setIsClicked(!isClicked);
     if (!showModal) {
       setShowModal(false);
     }
   };
-  const handleButtonClick1 = () => {
-      setIsClicked(!isClicked);
-    
-  };
+ 
   const handleButtonClick2 = () => {
-    //   setIsClicked(!isClicked);
+      // setIsClicked(!isClicked);
     if (!showModal) {
       setShowModal(true);
     }
@@ -35,6 +32,8 @@ const Test = () => {
     setShowModal(false);
   };
 
+
+
   return (
     <div>
       <Image className="py-8" src={Img3} />
@@ -43,7 +42,7 @@ const Test = () => {
 
         <button
           className={`px-4 py-2 ${buttonClass} absolute left-[0vh] top-[88vh] text-black rounded-md mx-8`}
-          // onClick={handleButtonClick}
+          onClick={handleButtonClick}
         >
           {isClicked ? "ON" : "OFF"}
         </button>
@@ -72,13 +71,13 @@ const Test = () => {
         )}
       </div>
 
-
+{/* 
       <div className="space-y-4 text-center">
         <button
           className="bg-blue-500 absolute left-[15vh] top-[116vh] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
             toggleBox() ; handleButtonClick1();}}
-          // onClick={handleButtonClick1}
+         
         >
            {isClicked ? "Break connections" : "Make connections"}
         </button>
@@ -89,7 +88,7 @@ const Test = () => {
             <div className="absolute left-[85vh] top-[101vh] w-12 h-32 z-20 bg-white order border-gray-300 "></div>
           </div>
         )}
-      </div>
+      </div> */}
 
 
     </div>
