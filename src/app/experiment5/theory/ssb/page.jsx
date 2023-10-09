@@ -4,7 +4,9 @@ const page = () => {
   return (
     <div>
       <div className="p-4 lg:p-8 lg:w-[70%] mx-auto">
-        <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">SSB-SC Modulation</h1>
+        <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">
+          SSB-SC Modulation
+        </h1>
         <p className="pb-6">
           As we see in the case of DSB-SC, only sidebands are transmitted as
           they carry all information about the signal. On the other hand, the
@@ -13,8 +15,12 @@ const page = () => {
           the transmitted one.{" "}
         </p>
 
-        <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">SSB-SC Modulator using Hilbert Transform</h1>
-        <p className="pb-6">The SSB-SC modulated signal Sssbsc(t) can be written as</p>
+        <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">
+          SSB-SC Modulator using Hilbert Transform
+        </h1>
+        <p className="pb-6">
+          The SSB-SC modulated signal Sssbsc(t) can be written as
+        </p>
 
         <p className="pb-6">
           Where s(t) is the message (real-valued), s ̂(t) is the Hilbert
@@ -32,7 +38,9 @@ const page = () => {
           + js(t)sin2πf0t + js ̂(t)cos2πf0t - s ̂(t).sin(2πf0t)]
         </p>
 
-        <p className="pb-6">So, Sssbsc(t) = s(t).cos(2πf0t) - s ̂(t).sin(2πf0t) </p>
+        <p className="pb-6">
+          So, Sssbsc(t) = s(t).cos(2πf0t) - s ̂(t).sin(2πf0t){" "}
+        </p>
 
         <p className="pb-6">(This results the upper sideband of the signal)</p>
 
@@ -67,7 +75,7 @@ const page = () => {
 
         <p>
           and again the real part of this expression causes no loss of
-          information. With Euler's formula to expand e2πf0t , we obtain
+          information. With Euler&apos;s formula to expand e2πf0t , we obtain
         </p>
         {/* <p className="pb-6">sssbsc(t) = Re{sa(t).e2πf0t}
          = Re {[ s(t) + j. s ̂(t)] . [cos(2πf0t) + j.sin(2πf0t)]}
@@ -82,7 +90,9 @@ const page = () => {
           acceptable in voice communications.{" "}
         </p>
 
-        <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">Lower sideband Generation</h1>
+        <h1 className="text-2xl pb-4 font-bold underline underline-offset-4">
+          Lower sideband Generation
+        </h1>
         <p className="pb-6">
           s(t) can also be recovered as the real part of the complex-conjugate,
           sa*(t), which represents the negative frequency portion of S(f), when
@@ -104,19 +114,18 @@ const page = () => {
           Which is the classic model of suppressed carrier double sideband AM.
           In this way we can recover the original message signal utilizing
           Hilbert transform.
-          </p>
-          <p className="pb-6"> 
-            One important characteristic of the analytical signal is that its
-            spectral content lies in the positive Nyquist interval. If we shift
-            the imaginary part of our analytic (complex) signal by 90 degrees
-            (+j) and add it to the real part, the negative frequencies will
-            cancel while the positive frequencies will add. This results in a
-            signal with no negative frequencies. Also, the magnitude of the
-            frequency component in the complex signal is twice the magnitude of
-            the frequency component in the real signal. This is similar to a
-            one-sided spectrum, which contains the total signal power in the
-            positive frequencies.{" "}
-          
+        </p>
+        <p className="pb-6">
+          One important characteristic of the analytical signal is that its
+          spectral content lies in the positive Nyquist interval. If we shift
+          the imaginary part of our analytic (complex) signal by 90 degrees (+j)
+          and add it to the real part, the negative frequencies will cancel
+          while the positive frequencies will add. This results in a signal with
+          no negative frequencies. Also, the magnitude of the frequency
+          component in the complex signal is twice the magnitude of the
+          frequency component in the real signal. This is similar to a one-sided
+          spectrum, which contains the total signal power in the positive
+          frequencies.{" "}
         </p>
       </div>
     </div>

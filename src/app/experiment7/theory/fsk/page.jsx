@@ -37,7 +37,7 @@ const page = () => {
         </span>
       </div> */}
 
-        <p className="pb-6">fi = 1 / (2П√((L1+L2)(C+C')) )</p>
+        <p className="pb-6">fi = 1 / (2П√((L1+L2)(C+C&apos;)) )</p>
 
         <p className="pb-6 font-bold">Transmission of binary ‘1’:</p>
 
@@ -108,9 +108,6 @@ const page = () => {
         <p className="pb-6 font-bold">a. Constellation Diagram</p>
         <p className="pb-6 font-bold">Energy per bit (Eb):</p>
         <p className="pb-6">** for transmission of binary ‘1’</p>
-
-
-        
       </div>
     </div>
   );
