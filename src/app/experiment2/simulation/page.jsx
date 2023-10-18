@@ -1,19 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 // import Plot from "react-plotly.js";
-import Subnavbar from "../../../components/Subnavbar";
 import dynamic from "next/dynamic";
 
-const links = [
-  { label: "Aim", url: "/experiment2" },
-  { label: "Theory", url: "/experiment2/theory" },
-  { label: "Pretest", url: "/experiment2/pretest" },
-  { label: "Procedure", url: "/experiment2/procedure" },
-  { label: "Simulation", url: "/experiment2/simulation" },
-  { label: "Posttest", url: "/experiment2/posttest" },
-  { label: "References", url: "/experiment2/reference" },
-  { label: "Feedback", url: "/experiment2/feedback" },
-];
 const Page = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Prevents server-side rendering
@@ -74,9 +63,14 @@ const Page = () => {
       signalDuration
     );
 
+    const offset = Math.abs(Math.min(...modulationSignalData));
+    const scaledModulationSignalData = modulationSignalData.map(
+      (value) => value + offset
+    );
+
     // Perform Frequency Modulation (FM) by changing carrier frequency
     const fmSignalData = carrierSignalData.map((carrierValue, i) => {
-      const deviation = modulationSignalData[i] * 100; // Adjust the deviation factor as needed
+      const deviation = modulationSignalData[i] * amplitude;
       const frequency = carrierFrequency + deviation;
       return amplitude * Math.sin(2 * Math.PI * frequency * timeAxis[i]);
     });
@@ -89,7 +83,6 @@ const Page = () => {
 
   return (
     <div>
-      <Subnavbar links={links} />
       {!sim ? (
         <div className="flex flex-col justify-center items-center py-10">
           <h1 className=" text-3xl font-bold">Enter Simulation Requirements</h1>
