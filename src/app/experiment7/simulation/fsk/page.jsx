@@ -1,8 +1,8 @@
 "use client";
+"use client";
 import dynamic from "next/dynamic";
 
 import React, { useEffect, useState } from "react";
-import Plot from "react-plotly.js";
 
 const FSKModulation = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
@@ -117,12 +117,12 @@ const FSKModulation = () => {
           },
         }}
       />
-      <div
+      {/* <div
         onClick={() => (window.location = "/experiment7/simulation")}
         className="cursor-pointer hover:bg-blue-300 py-2 px-5 rounded text-center border border-blue-500 bg-blue-200"
       >
         Go Back
-      </div>
+      </div> */}
     </div>
   );
 };
