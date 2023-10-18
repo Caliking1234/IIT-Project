@@ -211,16 +211,16 @@ const Page = () => {
 
   return (
     <>
-      <div className=" w-full h-fit bg-gray-200 flex items-center justify-center">
+      <div className=" w-full h-fit  flex items-center justify-center py-8">
         {type == 1 ? (
-          <Image src={PAMImage} height={200} width={200} />
+          <Image src={PAMImage} height={700} width={700}   />
         ) : type == 2 ? (
-          <Image src={PPMImage} height={200} width={200} />
+          <Image src={PPMImage} height={700} width={700} />
         ) : (
-          <Image src={PWMImage} height={200} width={200} />
+          <Image src={PWMImage} height={700} width={700} />
         )}
       </div>
-      <div className=" w-full h-fit bg-gray-200">
+      <div className=" w-full h-fit ">
         <div className=" grid grid-cols-1 sm:grid-cols-2 w-full gap-2 py-5">
           <div className=" w-full flex flex-col px-2">
             <DynamicPlot
