@@ -1,22 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Subnavbar from "../../../components/Subnavbar";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import PAMImage from "../../../../public/Image/PAM.jpg";
 import PWMImage from "../../../../public/Image/PWM.jpg";
 import PPMImage from "../../../../public/Image/PPM.jpg";
-
-const links = [
-  { label: "Aim", url: "/experiment1" },
-  { label: "Theory", url: "/experiment1/theory" },
-  { label: "Pretest", url: "/experiment1/pretest" },
-  { label: "Procedure", url: "/experiment1/procedure" },
-  { label: "Simulation", url: "/experiment1/simulation" },
-  { label: "Posttest", url: "/experiment1/posttest" },
-  { label: "References", url: "/experiment1/reference" },
-  { label: "Feedback", url: "/experiment1/feedback" },
-];
 
 const Page = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
@@ -213,7 +201,7 @@ const Page = () => {
     <>
       <div className=" w-full h-fit  flex items-center justify-center py-8">
         {type == 1 ? (
-          <Image src={PAMImage} height={700} width={700}   />
+          <Image src={PAMImage} height={700} width={700} />
         ) : type == 2 ? (
           <Image src={PPMImage} height={700} width={700} />
         ) : (

@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-import React from 'react'
-import Ask from './Ask'
-import Psk from './Psk'
-import Fsk from './Fsk'
-=======
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
->>>>>>> e94c3949b1d93b6b67488e525869ad08528878ac
 
 const Sims = [
   {
@@ -27,16 +20,6 @@ const Sims = [
 const Page = () => {
   const navigate = useRouter();
   return (
-<<<<<<< HEAD
-    <div>
-      {/* <Ask/> */}
-      {/* <Psk/> */}
-      {/* <Fsk/> */}
-      <h1>hello</h1>
-    </div>
-  )
-}
-=======
     <div className="flex w-full justify-center items-center h-[50vh]">
       <div className="p-10 flex flex-col gap-5 rounded-lg shadow-xl">
         <div className="text-2xl font-semibold">Simulations</div>
@@ -57,6 +40,5 @@ const Page = () => {
     </div>
   );
 };
->>>>>>> e94c3949b1d93b6b67488e525869ad08528878ac
 
 export default Page;

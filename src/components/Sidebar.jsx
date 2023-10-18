@@ -1,31 +1,29 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import {
   MdOutlineDashboard,
   MdAccountCircle,
   MdAnalytics,
   MdOutlineSettings,
   MdLogout,
-} from 'react-icons/md';
+} from "react-icons/md";
 import {
   BsChevronDown,
   BsChatLeftText,
   BsCalendarCheck,
   BsFiles,
   BsServer,
-} from 'react-icons/bs';
+} from "react-icons/bs";
 
 const Menus = [
-  { title: 'EXPERIMENT-1', src: 'Chart_fill',  },
-  { title: 'EXPERIMENT-2', src: 'Chat',  },
-  { title: 'EXPERIMENT-3', src: 'User', },
-  { title: 'EXPERIMENT-4 ', src: 'Calendar',  },
-  { title: 'EXPERIMENT-5', src: 'Chart_fill',  },
-  { title: 'EXPERIMENT-6', src: 'Chat',  },
-  { title: 'EXPERIMENT-7', src: 'User', },
-  { title: 'EXPERIMENT-8 ', src: 'Calendar',  },
- 
-
+  { title: "EXPERIMENT-1", src: "Chart_fill" },
+  { title: "EXPERIMENT-2", src: "Chat" },
+  { title: "EXPERIMENT-3", src: "User" },
+  { title: "EXPERIMENT-4 ", src: "Calendar" },
+  { title: "EXPERIMENT-5", src: "Chart_fill" },
+  { title: "EXPERIMENT-6", src: "Chat" },
+  { title: "EXPERIMENT-7", src: "User" },
+  { title: "EXPERIMENT-8 ", src: "Calendar" },
 ];
 
 const Sidebar = () => {
@@ -36,16 +34,15 @@ const Sidebar = () => {
   };
   return (
     <div className=" h-screen flex items-end z-90 fixed">
-      
       <button
         className="fixed lg:hidden z-90 bottom-10 right-8 bg-teal-800 w-10 h-10 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-teal-800   duration-300"
         onClick={toggleSidebar}
       >
-        <span class="text-white">
+        <span className="text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
-            class="w-6 m-auto"
+            className="w-6 m-auto"
             viewBox="0 0 16 16"
           >
             <path
@@ -58,14 +55,13 @@ const Sidebar = () => {
 
       <div
         className={` ${
-          open ? 'w-48 px-2 ' : 'w-0 '
+          open ? "w-48 px-2 " : "w-0 "
         } lg:w-72 bg-teal-800 h-screen   relative duration-500`}
       >
-        
         <div className=" justify-center mt-3">
           <h1
             className={`text-white  font-medium text-2xl text-center duration-200 ${
-              !open && 'invisible'
+              !open && "invisible"
             }`}
           >
             LOGO
@@ -77,14 +73,14 @@ const Sidebar = () => {
               <li
                 key={index}
                 className={`flex  rounded-md p-2 cursor-pointer hover:bg-teal-400 text-white text-sm items-center gap-x-4 
-              ${Menu.gap ? 'mt-9' : 'mt-2'}  `}
+              ${Menu.gap ? "mt-9" : "mt-2"}  `}
               >
                 {Menu.icon ? Menu.icon : <MdOutlineDashboard />}
                 <span className="flex-1">{Menu.title}</span>
                 {Menu.subMenus && (
                   <BsChevronDown
                     onClick={() => setSubMenuOpen(!subMenuOpen)}
-                    className={`${subMenuOpen && 'rotate-180'}`}
+                    className={`${subMenuOpen && "rotate-180"}`}
                   />
                 )}
               </li>

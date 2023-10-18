@@ -1,0 +1,9 @@
+.backgroundDiv {
+  position: relative;
+  background-image: url("../../../../../public/Image/ASK.jpg"); /* Reference to the image in the public folder */
+  background-size: auto;
+  width: 100%;
+  height: 500px;
+  border: 2px solid;
+  background-repeat: no-repeat; /* Prevent repeating the image */
+}
