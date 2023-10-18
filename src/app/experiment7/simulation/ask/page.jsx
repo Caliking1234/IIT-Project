@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Plot from "react-plotly.js";
 import dynamic from "next/dynamic";
 import styles from "./ask.module.css";
 
@@ -122,7 +121,7 @@ const ASKModulation = () => {
                 </button>
               </div>
               {/* <p>Modal Content Goes Here</p> */}
-              <Plot
+              <DynamicPlot
                 data={[
                   {
                     x: time,
@@ -198,7 +197,7 @@ const ASKModulation = () => {
                 </button>
               </div>
               {/* <p>Modal Content Goes Here</p> */}
-              <Plot
+              <DynamicPlot
                 data={[
                   {
                     x: time,
@@ -274,7 +273,7 @@ const ASKModulation = () => {
                 </button>
               </div>
               {/* <p>Modal Content Goes Here</p> */}
-              <Plot
+              <DynamicPlot
                 data={[
                   {
                     x: time,
