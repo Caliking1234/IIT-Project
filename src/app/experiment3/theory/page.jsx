@@ -28,7 +28,7 @@ const page = () => {
             consisting of random variables indexed by time index t is a time
             series.
           </p>{" "}
-          {/* &hellip; */}
+          
           <p className="pb-6">
             The stochastic behavior of {"{Xt}"} is determined by specifying the
             probability density or mass functions (pdf’s).{" "}
