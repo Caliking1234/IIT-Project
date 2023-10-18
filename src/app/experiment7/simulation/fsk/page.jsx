@@ -38,7 +38,7 @@ const FSKModulation = () => {
 
   return (
     <div>
-      <Plot
+      <DynamicPlot
         data={[
           {
             x: time,
@@ -58,7 +58,7 @@ const FSKModulation = () => {
         }}
       />
 
-      <Plot
+      <DynamicPlot
         data={[
           {
             x: time,
@@ -78,7 +78,7 @@ const FSKModulation = () => {
         }}
       />
 
-      <Plot
+      <DynamicPlot
         data={[
           {
             x: time,
@@ -98,7 +98,7 @@ const FSKModulation = () => {
         }}
       />
 
-      <Plot
+      <DynamicPlot
         data={[
           {
             x: time,
