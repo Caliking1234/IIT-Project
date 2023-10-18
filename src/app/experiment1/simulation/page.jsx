@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Subnavbar from "../../../components/Subnavbar";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import PAMImage from "../../../../public/Image/PAM.jpg";
+import PAMImage from "../../../../public/Image/pamimg.jpg";
 import PWMImage from "../../../../public/Image/PWM.jpg";
 import PPMImage from "../../../../public/Image/PPM.jpg";
 
@@ -213,11 +213,27 @@ const Page = () => {
     <>
       <div className=" w-full h-fit  flex items-center justify-center py-8">
         {type == 1 ? (
+          <>
           <Image src={PAMImage} height={700} width={700}   />
+          <button className="absolute float-right right-[150px] top-[38vh] p-2 rounded-sm bg-red-200 "> click for modulating signal</button> 
+          <button className="absolute float-right top-[68vh] right-[170px] p-2 rounded-sm bg-green-200 "> click for modulated signal </button> 
+          <button className="absolute float-right top-[94vh] right-[270px] p-2 rounded-sm bg-orange-200 "> click for carrier signal </button> 
+
+          </>
         ) : type == 2 ? (
-          <Image src={PPMImage} height={700} width={700} />
-        ) : (
+          <>
           <Image src={PWMImage} height={700} width={700} />
+          <button className="absolute float-left left-[150px] top-[38vh] p-2 rounded-sm bg-red-200 "> click for modulating signal</button> 
+          <button className="absolute float-left top-[68vh] left-[150px] p-2 rounded-sm bg-green-200 "> click for modulated signal </button> 
+          <button className="absolute float-right top-[55vh] right-[210px] p-2 rounded-sm bg-orange-200 "> click for carrier signal </button>  
+          </>
+        ) : (
+          <>
+          <Image src={PPMImage} height={700} width={700} />
+          <button className="absolute float-left left-[150px] top-[34vh] p-2 rounded-sm bg-red-200 "> click for modulating signal</button> 
+          <button className="absolute float-left top-[55vh] left-[150px] p-2 rounded-sm bg-green-200 "> click for modulated signal </button> 
+          <button className="absolute float-right top-[46vh] right-[210px] p-2 rounded-sm bg-orange-200 "> click for carrier signal </button>  
+          </>
         )}
       </div>
       <div className=" w-full h-fit ">
