@@ -65,19 +65,19 @@ const ASKModulation = () => {
       <div className={styles.backgroundDiv}>
         <button
           onClick={openModal1}
-          className="absolute left-[5vw] top-[15vh] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+          className="absolute left-[5vw] top-[19vh] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
         >
           Change Digital Signal
         </button>
         <button
           onClick={openModal2}
-          className="absolute left-[26vw] top-[40vh] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+          className="absolute left-[32vw] top-[52vh] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
         >
           Change Carrier Signal
         </button>
         <button
           onClick={openModal3}
-          className="absolute right-[20vw] top-[15vh] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+          className="absolute right-[3vw] top-[19vh] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
         >
           Check Output
         </button>

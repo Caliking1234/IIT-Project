@@ -1,11 +1,10 @@
 import React from "react";
-import Textsec1 from "../../../components/Textsec1";
-import Textsec2 from "../../../components/Textsec2";
-import Textsec3 from "../../../components/Textsec3";
-import Textsec4 from "../../../components/Textsec4";
-import Textsec5 from "../../../components/Textsec5";
-import Subnavbar from '../../../components/Subnavbar'
-
+// import Textsec1 from "../../../components/Textsec1";
+// import Textsec2 from "../../../components/Textsec2";
+// import Textsec3 from "../../../components/Textsec3";
+// import Textsec4 from "../../../components/Textsec4";
+// import Textsec5 from "../../../components/Textsec5";
+// import Subnavbar from '../../../components/Subnavbar'
 
 // const links = [
 //   { label: "Aim", url: "/experiment1" },
@@ -20,10 +19,8 @@ import Subnavbar from '../../../components/Subnavbar'
 // ];
 
 const page = () => {
-
   return (
     <div>
-
       <div className="lg:p-24 px-6">
         <p className="text-xl lg:text-4xl my-6 py-2 border-b-4">THEORY FOR :</p>
 
@@ -43,17 +40,33 @@ const page = () => {
           example, these pulse modulation techniques are used in optical fibers,
           wireless channels, computer buses, etc.
         </p>
-<div className="text-sm lg:text-2xl pb-8">
-
-        <p><a href="/experiment1/theory/pam" className=" hover:text-green-400" >Click here for PAM theory</a></p>
-        <p><a href="/experiment1/theory/pwm" className=" hover:text-green-400" >Click here for PWM theory</a></p>
-        <p><a href="/experiment1/theory/ppm" className=" hover:text-green-400" >Click here for PPM theory</a></p>
-        <p><a href="/experiment1/theory/dm" className=" hover:text-green-400" >Click here for DM theory</a></p>
-        <p><a href="/experiment1/theory/pcm" className=" hover:text-green-400" >Click here for PCM theory</a></p>
-
-</div>
-
-        
+        <div className="text-sm lg:text-2xl pb-8">
+          <p>
+            <a href="/experiment1/theory/pam" className=" hover:text-green-400">
+              Click here for PAM theory
+            </a>
+          </p>
+          <p>
+            <a href="/experiment1/theory/pwm" className=" hover:text-green-400">
+              Click here for PWM theory
+            </a>
+          </p>
+          <p>
+            <a href="/experiment1/theory/ppm" className=" hover:text-green-400">
+              Click here for PPM theory
+            </a>
+          </p>
+          <p>
+            <a href="/experiment1/theory/dm" className=" hover:text-green-400">
+              Click here for DM theory
+            </a>
+          </p>
+          <p>
+            <a href="/experiment1/theory/pcm" className=" hover:text-green-400">
+              Click here for PCM theory
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
