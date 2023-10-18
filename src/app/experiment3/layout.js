@@ -6,14 +6,14 @@ import Footer from "../../components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 const links = [
-  { label: "Aim", url: "/experiment4" },
-  { label: "Theory", url: "/experiment4/theory" },
-  { label: "Pretest", url: "/experiment4/pretest" },
-  { label: "Procedure", url: "/experiment4/procedure" },
-  { label: "Simulation", url: "/experiment4/simulation" },
-  { label: "Posttest", url: "/experiment4/posttest" },
-  { label: "References", url: "/experiment4/reference" },
-  { label: "Feedback", url: "/experiment4/feedback" },
+  { label: "Aim", url: "/experiment2" },
+  { label: "Theory", url: "/experiment2/theory" },
+  { label: "Pretest", url: "/experiment2/pretest" },
+  { label: "Procedure", url: "/experiment2/procedure" },
+  { label: "Simulation", url: "/experiment2/simulation" },
+  { label: "Posttest", url: "/experiment2/posttest" },
+  { label: "References", url: "/experiment2/reference" },
+  { label: "Feedback", url: "/experiment2/feedback" },
 ];
 
 export const metadata = {
