@@ -7,9 +7,11 @@ const ASKModulation = () => {
   const DynamicPlot = dynamic(() => import("react-plotly.js"), {
     ssr: false, // Prevents server-side rendering
   });
+
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [isModalOpen3, setIsModalOpen3] = useState(false);
+
   const openModal1 = () => {
     setIsModalOpen1(true);
   };
@@ -19,6 +21,7 @@ const ASKModulation = () => {
   const openModal3 = () => {
     setIsModalOpen3(true);
   };
+  
   const closeModal1 = () => {
     setIsModalOpen1(false);
   };

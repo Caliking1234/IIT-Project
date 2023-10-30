@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-// import Subnavbar from "../../components/Subnavbar";
+import Subnavbar from "../../components/Subnavbar";
 // import Exps from "../../components/Exps";
 
 import Navbar from "../../components/Navbar";
@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Navbar/>
-        {/* <Subnavbar links={links}/> */}
+        <Subnavbar links={links}/>
         {/* <Exps/> */}
         {children}
         <Footer />

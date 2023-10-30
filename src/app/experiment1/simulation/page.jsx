@@ -12,9 +12,9 @@ const Page = () => {
   });
   const [type, setType] = useState(1);
   const [pulseType, setPulseType] = useState(1);
+
   const [carrierGraph, setcarrierCurve] = useState(false);
   const [msgSignal, setmsgSignal] = useState(false);
-
   const [pamGraph, setpamCurve] = useState(false);
   const [pwmGraph, setpwmCurve] = useState(false);
   const [pwmModGraph, setpwmModCurve] = useState(false);
@@ -29,15 +29,14 @@ const Page = () => {
   const [dutyCycle, setDCycle] = useState(50);
 
   const [pamSignal, setPamSignal] = useState([]);
-
   const [PWM, setPWM] = useState([]);
   const [PPM, setPPM] = useState([]);
   const [pwmSignal, setPwmSignal] = useState([]);
 
   useEffect(() => {
     //Sin wave generate hori hai
-    const generateSinSignal = (amplitude, carrierFrequency, signalDuration) => {
-      const stepSize = 1 / 1000; // 1000 steps per second
+    const generateSinSignal = (amplitude, carrierFrequency, sigration) => {
+      const stepSize = 1 / 1000; // 1000 steps per secondnalDu
       const data = [];
       for (let t = 0; t < signalDuration; t += stepSize) {
         const y = amplitude * Math.sin(2 * Math.PI * carrierFrequency * t);
