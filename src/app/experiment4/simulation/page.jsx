@@ -121,7 +121,6 @@ const generateTriangleSignal = (amplitude, carrierFrequency, signalDuration, sam
   return data;
 };
 
-
     
     const generatePulseSignal = (signalDuration, frequency) => {
       const stepSize = 1 / 1000; // 1000 steps per second
