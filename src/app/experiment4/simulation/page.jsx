@@ -19,8 +19,8 @@ const page = () => {
   const [pwmModGraph, setpwmModCurve] = useState(false);
 
   const [signalDuration, setsignalDuration] = useState(15);
-  const [carrierFrequency, setcarriierfreq] = useState(0.5);
-  const [frequency, setfreq] = useState(0.2);
+  const [carrierFrequency, setcarriierfreq] = useState(0.8);
+  const [frequency, setfreq] = useState(0.1);
   const [time, setTime] = useState([]);
   const [carrierSignal, setCarrierSignal] = useState([]);
   const [amplitude, setAmplitude] = useState(1);
@@ -45,7 +45,6 @@ const page = () => {
       return data;
     };
 
-
     const demodulateSinSignal = (pamSignalData) => {
       const demodulatedSignal = [];
       for (let i = 0; i < pamSignalData.length; i++) {
@@ -55,73 +54,99 @@ const page = () => {
       }
       return demodulatedSignal;
     };
-    
+
+    const removeSignalDistortion = (
+      demodulatedSignal,
+      cutoffFrequency,
+      samplingRate
+    ) => {
+      // Calculate the filter coefficients for a simple first-order low-pass filter (Butterworth or other filters can be used for better performance)
+      const RC = 1 / (2 * Math.PI * cutoffFrequency);
+      const alpha = 1 / (1 + RC * samplingRate);
+
+      // Apply a first-order low-pass filter
+      let filteredSignal = [demodulatedSignal[0]]; // Initialize the filtered signal with the first value
+      for (let i = 1; i < demodulatedSignal.length; i++) {
+        filteredSignal[i] =
+          alpha * demodulatedSignal[i] + (1 - alpha) * filteredSignal[i - 1];
+      }
+
+      return filteredSignal;
+    };
+
     const quantizeSignal = (demodulatedSignal, quantizationLevels) => {
       const minDemodulatedValue = Math.min(...demodulatedSignal);
       const maxDemodulatedValue = Math.max(...demodulatedSignal);
-    
-      const stepSize = (maxDemodulatedValue - minDemodulatedValue) / quantizationLevels;
-    
+
+      const stepSize =
+        (maxDemodulatedValue - minDemodulatedValue) / quantizationLevels;
+
       const quantizedSignal = demodulatedSignal.map((value) => {
         // Map the demodulated value to the closest quantization level
-        const quantizedValue = Math.floor((value - minDemodulatedValue) / stepSize);
+        const quantizedValue = Math.floor(
+          (value - minDemodulatedValue) / stepSize
+        );
         return quantizedValue;
       });
-    
+
       return quantizedSignal;
     };
 
+    // -----------------------------------------------------
+    const generateCosineSignal = (
+      amplitude,
+      carrierFrequency,
+      signalDuration
+    ) => {
+      const stepSize = 1 / 1000; // 1000 steps per second
+      const data = [];
+      for (let t = 0; t < signalDuration; t += stepSize) {
+        const y = amplitude * Math.cos(2 * Math.PI * carrierFrequency * t);
+        data.push(y);
+      }
+      return data;
+    };
 
-// -----------------------------------------------------
-const generateCosineSignal = (
-  amplitude,
-  carrierFrequency,
-  signalDuration
-) => {
-  const stepSize = 1 / 1000; // 1000 steps per second
-  const data = [];
-  for (let t = 0; t < signalDuration; t += stepSize) {
-    const y = amplitude * Math.cos(2 * Math.PI * carrierFrequency * t);
-    data.push(y);
-  }
-  return data;
-};
+    const demodulatePAMSignalCosine = (pamSignalData) => {
+      const demodulatedSignal = [];
+      for (let i = 0; i < pamSignalData.length; i++) {
+        // Use the absolute value to extract the envelope (amplitude) of the modulated signal
+        const envelope = Math.abs(pamSignalData[i]);
+        demodulatedSignal.push(envelope);
+      }
+      return demodulatedSignal;
+    };
 
+    // -----------------------------------------------------------------
 
-const demodulatePAMSignalCosine = (pamSignalData) => {
-  const demodulatedSignal = [];
-  for (let i = 0; i < pamSignalData.length; i++) {
-    // Use the absolute value to extract the envelope (amplitude) of the modulated signal
-    const envelope = Math.abs(pamSignalData[i]);
-    demodulatedSignal.push(envelope);
-  }
-  return demodulatedSignal;
-};
-   
-// -----------------------------------------------------------------
+    const generateTriangleSignal = (
+      amplitude,
+      carrierFrequency,
+      signalDuration,
+      sampleRate
+    ) => {
+      const data = [];
+      const halfPeriod = 0.5 / carrierFrequency;
+      const samplesPerHalfPeriod = Math.floor(sampleRate * halfPeriod);
 
-const generateTriangleSignal = (amplitude, carrierFrequency, signalDuration, sampleRate) => {
-  const data = [];
-  const halfPeriod = 0.5 / carrierFrequency;
-  const samplesPerHalfPeriod = Math.floor(sampleRate * halfPeriod);
+      for (let t = 0; t < signalDuration; t += 1 / sampleRate) {
+        const periodTime = t % (1 / carrierFrequency);
+        let y;
 
-  for (let t = 0; t < signalDuration; t += 1 / sampleRate) {
-    const periodTime = t % (1 / carrierFrequency);
-    let y;
+        if (periodTime < halfPeriod) {
+          y = 2 * amplitude * periodTime * carrierFrequency - amplitude;
+        } else {
+          y =
+            -2 * amplitude * (periodTime - halfPeriod) * carrierFrequency +
+            amplitude;
+        }
 
-    if (periodTime < halfPeriod) {
-      y = 2 * amplitude * periodTime * carrierFrequency - amplitude;
-    } else {
-      y = -2 * amplitude * (periodTime - halfPeriod) * carrierFrequency + amplitude;
-    }
+        data.push(y);
+      }
 
-    data.push(y);
-  }
+      return data;
+    };
 
-  return data;
-};
-
-    
     const generatePulseSignal = (signalDuration, frequency) => {
       const stepSize = 1 / 1000; // 1000 steps per second
       const data = [];
@@ -154,21 +179,22 @@ const generateTriangleSignal = (amplitude, carrierFrequency, signalDuration, sam
 
     let DemodSignal = [];
     DemodSignal = demodulateSinSignal(pamSignalData);
-    
+
+    let recoveredSignal = removeSignalDistortion(DemodSignal, 0.06, 0.001);
+
     let QuantizeSignal = [];
-    QuantizeSignal = quantizeSignal(DemodSignal , 8);
-    
+    QuantizeSignal = quantizeSignal(recoveredSignal, 1.9);
+
     setTime(timeAxis);
 
     let CosDemosignal = [];
     CosDemosignal = demodulatePAMSignalCosine(pamSignalData);
-    
-    
+
     console.log(DemodSignal);
-    
+
     setNewDemodSignal(QuantizeSignal);
     setNewDemodSignalCos(CosDemosignal);
-  }, [ ]);
+  }, []);
 
   console.log(newDemodSignal);
 
@@ -194,8 +220,7 @@ const generateTriangleSignal = (amplitude, carrierFrequency, signalDuration, sam
           },
         }}
       />
-
-<DynamicPlot
+      <DynamicPlot
         className=" w-full h-full"
         data={[
           {
@@ -215,7 +240,6 @@ const generateTriangleSignal = (amplitude, carrierFrequency, signalDuration, sam
           },
         }}
       />
-
       hello demodulatePAMSignalCosine
     </div>
   );
