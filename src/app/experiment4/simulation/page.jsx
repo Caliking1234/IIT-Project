@@ -18,6 +18,8 @@ const page = () => {
   const [pwmGraph, setpwmCurve] = useState(false);
   const [pwmModGraph, setpwmModCurve] = useState(false);
 
+  const [modulationFrequency, setModulationFrequency] = useState(0.1); // in Hz
+
   const [signalDuration, setsignalDuration] = useState(15);
   const [carrierFrequency, setcarriierfreq] = useState(0.8);
   const [frequency, setfreq] = useState(0.1);
@@ -33,6 +35,8 @@ const page = () => {
   const [pwmSignal, setPwmSignal] = useState([]);
   const [newDemodSignal, setNewDemodSignal] = useState([]);
   const [newDemodSignalCos, setNewDemodSignalCos] = useState([]);
+  const [fmSignal, setFmSignal] = useState([]); // DmodfmSignal
+  const [dmodfmSignal, setDmodfmSignal] = useState([]); // DmodfmSignal
 
   useEffect(() => {
     const generateSinSignal = (amplitude, carrierFrequency, sigration) => {
@@ -55,25 +59,6 @@ const page = () => {
       return demodulatedSignal;
     };
 
-    const removeSignalDistortion = (
-      demodulatedSignal,
-      cutoffFrequency,
-      samplingRate
-    ) => {
-      // Calculate the filter coefficients for a simple first-order low-pass filter (Butterworth or other filters can be used for better performance)
-      const RC = 1 / (2 * Math.PI * cutoffFrequency);
-      const alpha = 1 / (1 + RC * samplingRate);
-
-      // Apply a first-order low-pass filter
-      let filteredSignal = [demodulatedSignal[0]]; // Initialize the filtered signal with the first value
-      for (let i = 1; i < demodulatedSignal.length; i++) {
-        filteredSignal[i] =
-          alpha * demodulatedSignal[i] + (1 - alpha) * filteredSignal[i - 1];
-      }
-
-      return filteredSignal;
-    };
-
     const quantizeSignal = (demodulatedSignal, quantizationLevels) => {
       const minDemodulatedValue = Math.min(...demodulatedSignal);
       const maxDemodulatedValue = Math.max(...demodulatedSignal);
@@ -90,6 +75,122 @@ const page = () => {
       });
 
       return quantizedSignal;
+    };
+
+    // Function to generate data for the modulation signal
+    const generateModulationSignal = (modulationFrequency, signalDuration) => {
+      const stepSize = 1 / 1000; // 1000 steps per second
+      const data = [];
+      for (let t = 0; t < signalDuration; t += stepSize) {
+        const y = Math.sin(2 * Math.PI * modulationFrequency * t);
+        data.push(y);
+      }
+      return data;
+    };
+
+    // Generate data for each signal
+
+    const modulationSignalData = generateModulationSignal(
+      modulationFrequency,
+      signalDuration
+    );
+
+    // ----------generateFM-------------------------------------------
+
+    const generateFM = (
+      carrierSignalData,
+      modulatingSignalData,
+      carrierFrequency,
+      modulationIndex,
+      signalDuration
+    ) => {
+      const data = [];
+      const stepSize = 1 / 1000; // 1000 steps per second
+
+      // Normalize the carrier waveform to 0 to 1 range
+      const maxAmplitude = Math.max(...carrierSignalData);
+      const minAmplitude = Math.min(...carrierSignalData);
+      const normalizedCarrierSignal = carrierSignalData.map(
+        (value) => (value - minAmplitude) / (maxAmplitude - minAmplitude)
+      );
+
+      // Normalize the modulating waveform to desired modulation index
+      const normalizedModulatingSignal = modulatingSignalData.map(
+        (value) => (value * modulationIndex) / Math.max(...modulatingSignalData)
+      );
+
+      for (let t = 0; t < signalDuration; t += stepSize) {
+        const cycle = 1 / carrierFrequency;
+        const index = Math.floor(
+          ((t % cycle) / cycle) * normalizedCarrierSignal.length
+        );
+        const frequencyDeviation = normalizedModulatingSignal[index];
+
+        const instantaneousFrequency = carrierFrequency + frequencyDeviation;
+
+        data.push(instantaneousFrequency);
+      }
+
+      return data;
+    };
+
+    // ----------generateFM demodulation-------------------------------------------
+
+    const demodulateFM = (
+      fmSignal,
+      carrierFrequency,
+      modulationIndex,
+      signalDuration
+    ) => {
+      // const stepSize = 1 / 1000; // 1000 steps per second
+      // const modulatingSignalData = [];
+
+      // for (let t = 0; t < signalDuration; t += stepSize) {
+      //   const cycle = 1 / carrierFrequency;
+      //   const index = Math.floor(
+      //     ((t % cycle) / cycle) * fmSignal.length
+      //   );
+
+      //   // Calculate the instantaneous frequency deviation
+      //   const instantaneousFrequency = fmSignal[index];
+      //   const frequencyDeviation = instantaneousFrequency - carrierFrequency;
+
+      //   // Normalize the frequency deviation to the original modulating signal range
+      //   const normalizedFrequencyDeviation = (frequencyDeviation / modulationIndex) * Math.max(...modulatingSignalData);
+
+      //   modulatingSignalData.push(normalizedFrequencyDeviation);
+      // }
+
+      // return modulatingSignalData;
+
+      const demodulatedSignal = [];
+      let phase = 0;
+
+      for (let i = 0; i < fmSignal.length; i++) {
+        // Calculate phase change based on frequency deviation
+        const deltaPhase =
+          (2 * Math.PI * (fmSignal[i] - carrierFrequency)) / carrierFrequency;
+
+        // Integrate the phase change to recover the modulating signal
+        phase += deltaPhase;
+        demodulatedSignal.push(phase);
+      }
+
+      return demodulatedSignal;
+
+      //     const demodulatedSignal = [];
+      // let phase = 0;
+      // const twoPi = 2 * Math.PI;
+      // const deltaPhi = (twoPi * carrierFrequency) / samplingRate;
+
+      // for (let i = 0; i < fmSignal.length; i++) {
+      //   // Compute the phase change based on the instantaneous frequency deviation
+      //   phase += deltaPhi * (1 + fmSignal[i]);
+      //   // Extract the phase change as the demodulated signal
+      //   demodulatedSignal.push(phase);
+      // }
+
+      // return demodulatedSignal;
     };
 
     // -----------------------------------------------------
@@ -177,13 +278,25 @@ const page = () => {
       (carrierValue, i) => carrierValue * pulseSignalData[i]
     );
 
+    let fmSignalData = generateFM(
+      carrierSignalData,
+      modulationSignalData,
+      carrierFrequency,
+      1,
+      signalDuration
+    );
+
+    let demodulatedfmsigdata = demodulateFM(
+      fmSignalData,
+      carrierFrequency,
+      0.001
+    );
+
     let DemodSignal = [];
     DemodSignal = demodulateSinSignal(pamSignalData);
 
-    let recoveredSignal = removeSignalDistortion(DemodSignal, 0.06, 0.001);
-
     let QuantizeSignal = [];
-    QuantizeSignal = quantizeSignal(recoveredSignal, 1.9);
+    QuantizeSignal = quantizeSignal(DemodSignal, 8);
 
     setTime(timeAxis);
 
@@ -227,12 +340,12 @@ const page = () => {
             type: "scatter",
             mode: "lines",
             x: time,
-            y: newDemodSignalCos,
-            name: "Carrier Signal",
+            y: dmodfmSignal,
+            name: "FM Signal",
           },
         ]}
         layout={{
-          title: "Carrier Signal",
+          title: "FM Signal",
           xaxis: { title: "Time (s)" },
           yaxis: {
             title: "Amplitude",
