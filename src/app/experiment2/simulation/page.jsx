@@ -9,9 +9,9 @@ const Page = () => {
   });
   const [sim, setsim] = useState(false);
   const [amplitude, setAmplitude] = useState(1);
-  const [carrierFrequency, setCarrierFrequency] = useState(1000); // in Hz
-  const [modulationFrequency, setModulationFrequency] = useState(5); // in Hz
-  const [signalDuration, setSignalDuration] = useState(1); // in seconds
+  const [carrierFrequency, setCarrierFrequency] = useState(0.5); // in Hz
+  const [modulationFrequency, setModulationFrequency] = useState(0.1); // in Hz
+  const [signalDuration, setSignalDuration] = useState(25); // in seconds
   const [time, setTime] = useState([]);
   const [carrierSignal, setCarrierSignal] = useState([]);
   const [modulationSignal, setModulationSignal] = useState([]);
@@ -63,17 +63,51 @@ const Page = () => {
       signalDuration
     );
 
-    const offset = Math.abs(Math.min(...modulationSignalData));
-    const scaledModulationSignalData = modulationSignalData.map(
-      (value) => value + offset
-    );
+    const generateFM = (
+      carrierSignalData,
+      modulatingSignalData,
+      carrierFrequency,
+      modulationIndex,
+      signalDuration
+    ) => {
+      const data = [];
+      const stepSize = 1 / 1000; // 1000 steps per second
 
-    // Perform Frequency Modulation (FM) by changing carrier frequency
-    const fmSignalData = carrierSignalData.map((carrierValue, i) => {
-      const deviation = modulationSignalData[i] * amplitude;
-      const frequency = carrierFrequency + deviation;
-      return amplitude * Math.sin(2 * Math.PI * frequency * timeAxis[i]);
-    });
+      // Normalize the carrier waveform to 0 to 1 range
+      const maxAmplitude = Math.max(...carrierSignalData);
+      const minAmplitude = Math.min(...carrierSignalData);
+      const normalizedCarrierSignal = carrierSignalData.map(
+        (value) => (value - minAmplitude) / (maxAmplitude - minAmplitude)
+      );
+
+      // Normalize the modulating waveform to desired modulation index
+      const normalizedModulatingSignal = modulatingSignalData.map(
+        (value) => (value * modulationIndex) / Math.max(...modulatingSignalData)
+      );
+
+      for (let t = 0; t < signalDuration; t += stepSize) {
+        const cycle = 1 / carrierFrequency;
+        const index = Math.floor(
+          ((t % cycle) / cycle) * normalizedCarrierSignal.length
+        );
+        const frequencyDeviation = normalizedModulatingSignal[index];
+
+        // Calculate the instantaneous frequency based on the modulation index and modulating signal
+        const instantaneousFrequency = carrierFrequency + frequencyDeviation;
+
+        data.push(instantaneousFrequency);
+      }
+
+      return data;
+    };
+
+    let fmSignalData = generateFM(
+      carrierSignalData,
+      modulationSignalData,
+      carrierFrequency,
+      1,
+      signalDuration
+    );
 
     setTime(timeAxis);
     setCarrierSignal(carrierSignalData);

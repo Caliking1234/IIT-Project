@@ -18,20 +18,20 @@ const Page = () => {
   const [pamGraph, setpamCurve] = useState(false);
   const [pwmGraph, setpwmCurve] = useState(false);
   const [pwmModGraph, setpwmModCurve] = useState(false);
+  const [ppmGraph, setppmCurve] = useState(false);
 
-  const [signalDuration, setsignalDuration] = useState(15);
-  const [carrierFrequency, setcarriierfreq] = useState(0.5);
-  const [frequency, setfreq] = useState(0.2);
+  const [signalDuration, setsignalDuration] = useState(25);
+  const [carrierFrequency, setcarriierfreq] = useState(0.1);
+  const [frequency, setfreq] = useState(0.05);
   const [time, setTime] = useState([]);
   const [carrierSignal, setCarrierSignal] = useState([]);
   const [amplitude, setAmplitude] = useState(1);
   const [pulse, setPulse] = useState([]);
-  const [dutyCycle, setDCycle] = useState(50);
+  const [dutyCycle, setDCycle] = useState(30);
 
-  const [pamSignal, setPamSignal] = useState([]);
+  const [PAM, setPamSignal] = useState([]);
   const [PWM, setPWM] = useState([]);
   const [PPM, setPPM] = useState([]);
-  const [pwmSignal, setPwmSignal] = useState([]);
 
   useEffect(() => {
     //Sin wave generate hori hai
@@ -98,21 +98,30 @@ const Page = () => {
       return data;
     };
 
-    // PWM SIgnal GE=eneration
     const generatePWM = (
-      amplitude,
+      carrierSignalData,
       carrierFrequency,
       signalDuration,
       dutyCycle
     ) => {
-      const stepSize = 1 / 1000; // 1000 steps per second
       const data = [];
+      const stepSize = 1 / 1000; // 1000 steps per second
+
+      // Normalize the waveform to 0 to 1 range
+      const maxAmplitude = Math.max(...carrierSignalData);
+      const minAmplitude = Math.min(...carrierSignalData);
+      const normalizedWaveform = carrierSignalData.map(
+        (value) => (value - minAmplitude) / (maxAmplitude - minAmplitude)
+      );
+
       for (let t = 0; t < signalDuration; t += stepSize) {
-        // Calculate the duty cycle value
+        const cycle = 1 / carrierFrequency;
+        const index = Math.floor(
+          ((t % cycle) / cycle) * normalizedWaveform.length
+        );
         const dutyCycleValue =
-          t % (1 / carrierFrequency) < dutyCycle / 100 ? 1 : 0;
-        const y = amplitude * dutyCycleValue;
-        data.push(y);
+          normalizedWaveform[index] < dutyCycle / 100 ? 1 : 0;
+        data.push(dutyCycleValue);
       }
 
       return data;
@@ -161,19 +170,13 @@ const Page = () => {
     setPulse(pulseSignalData);
 
     let pwmSignalData = generatePWM(
-      amplitude,
+      carrierSignalData,
       carrierFrequency,
       signalDuration,
       dutyCycle
     );
 
     setPWM(pwmSignalData);
-
-    pwmSignalData = pwmSignalData.map((carrierValue, i) =>
-      carrierValue < carrierSignal[i] ? 1 : 0
-    );
-
-    setPwmSignal(pwmSignalData);
 
     let ppmSignalData = [];
 
@@ -284,22 +287,32 @@ const Page = () => {
         ) : (
           <div className=" w-full max-h-[50vh] flex flex-col items-center justify-center">
             <Image src={PPMImage} height={500} width={500} />
-            <button className="absolute float-left left-[150px] top-[34vh] p-2 rounded-sm bg-red-200 ">
-              {" "}
-              click for modulating signal
-            </button>
-            <button className="absolute float-left top-[55vh] left-[150px] p-2 rounded-sm bg-green-200 ">
-              {" "}
-              click for modulated signal{" "}
-            </button>
             <button
               onClick={() => {
                 setcarrierCurve(!carrierGraph);
               }}
-              className="absolute float-right top-[46vh] right-[210px] p-2 rounded-sm bg-orange-200 "
+              className="absolute float-left left-[150px] top-[10%] p-2 rounded-sm bg-red-200 "
             >
               {" "}
-              click for carrier signal{" "}
+              click for Carrier signal
+            </button>
+            <button
+              onClick={() => {
+                setmsgSignal(!msgSignal);
+              }}
+              className="absolute float-left top-[65%] left-[150px] p-2 rounded-sm bg-green-200 "
+            >
+              {" "}
+              click for modulating signal{" "}
+            </button>
+            <button
+              onClick={() => {
+                setppmCurve(!ppmGraph);
+              }}
+              className="absolute float-right top-[46%] right-[210px] p-2 rounded-sm bg-orange-200 "
+            >
+              {" "}
+              click for modulated signal{" "}
             </button>
           </div>
         )}
@@ -543,7 +556,7 @@ const Page = () => {
                   type: "scatter",
                   mode: "lines",
                   x: time,
-                  y: pamSignal,
+                  y: PAM,
                   name: "Modulated Signal",
                 },
               ]}
@@ -571,7 +584,7 @@ const Page = () => {
                   type: "scatter",
                   mode: "lines",
                   x: time,
-                  y: PWM,
+                  y: pulse,
                   name: "Message Signal",
                 },
               ]}
@@ -599,7 +612,35 @@ const Page = () => {
                   type: "scatter",
                   mode: "lines",
                   x: time,
-                  y: pwmSignal,
+                  y: PWM,
+                  name: "Modulated Signal",
+                },
+              ]}
+              layout={{
+                title: "Modulated Signal",
+                xaxis: { title: "Time (s)" },
+                yaxis: {
+                  title: "Amplitude",
+                  range: [-2 * amplitude, 2 * amplitude],
+                },
+              }}
+            />
+          </div>
+          <div
+            className={
+              !ppmGraph
+                ? " bg-gray-700 absolute left-[50%] translate-x-[-50%] top-[-200%] w-[500px] h-[500px] gap-10 flex flex-col items-center justify-around transition-all ease-in duration-500 opacity-0"
+                : " bg-gray-700 absolute left-[50%] translate-x-[-50%] top-[35%] w-[500px] h-[500px] gap-10 flex flex-col items-center justify-around transition-all ease-in duration-500 opacity-100"
+            }
+          >
+            <DynamicPlot
+              className=" w-full h-full"
+              data={[
+                {
+                  type: "scatter",
+                  mode: "lines",
+                  x: time,
+                  y: PPM,
                   name: "Modulated Signal",
                 },
               ]}
